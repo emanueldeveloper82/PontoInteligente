@@ -28,11 +28,11 @@
 
 ## Author
 
-🇧🇷 **Emanuel da Anunciação Silva**
+🇧🇷 *** Emanuel da Anunciação Silva ***
 
-🌐 – emanuel.developer82@gmail.com
+👤 – Emanuel da Anunciação Silva – [@linkedin](https://www.linkedin.com/in/emanuel-silva-05743b84/) <br/>
+🌐 – [E-mail](emanuel.developer82@gmail.com) <br/>
 🎱 – Github: [@emanueldeveloper](https://github.com/emanueldeveloper82)
-👤 – Emanuel da Anunciação Silva – [@linkedin](https://www.linkedin.com/in/emanuel-silva-05743b84/) 
 
 
 ## 📝 License
