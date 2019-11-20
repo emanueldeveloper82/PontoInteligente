@@ -22,8 +22,6 @@
 	</td>
   </tr>
 </table>
-  
-
 
 
 ## Author
@@ -31,8 +29,8 @@
 🇧🇷 *** Emanuel da Anunciação Silva ***
 
 👤 – [Linkedin](https://www.linkedin.com/in/emanuel-silva-05743b84/) <br/>
-🌐 – [E-mail](emanuel.developer82@gmail.com) emanuel.developer82@gmail.com <br/>
-🎱 – [Github](https://github.com/emanueldeveloper82) emanueldeveloper82 
+🌐 – [E-mail](emanuel.developer82@gmail.com) <br/>
+🎱 – [Github](https://github.com/emanueldeveloper82) 
 
 
 ## 📝 License
