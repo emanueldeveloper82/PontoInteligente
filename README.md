@@ -8,11 +8,11 @@
 <table>
   <tr>  	
   	<td align="center">
-  		<a href="https://github.com/hgwood/blog">
+  		<a href="https://github.com/emanueldeveloper82/">
   			<img src="https://avatars3.githubusercontent.com/u/31600150?s=460&v=4" width="75px;" alt="Emanuel Baêa"/>
   			<br/>
   			<sub>
-  				<b>Hugo Wood</b>
+  				<b>Emanuel Developer</b>
   			</sub>
   		</a>
   		  <br/>
