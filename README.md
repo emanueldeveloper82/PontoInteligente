@@ -30,9 +30,9 @@
 
 🇧🇷 *** Emanuel da Anunciação Silva ***
 
-👤 – [linkedin] (https://www.linkedin.com/in/emanuel-silva-05743b84/) <br/>
-🌐 – [E-mail] (emanuel.developer82@gmail.com) emanuel.developer82@gmail.com <br/>
-🎱 – [Github] (https://github.com/emanueldeveloper82) emanueldeveloper82 
+👤 – [Linkedin](https://www.linkedin.com/in/emanuel-silva-05743b84/) <br/>
+🌐 – [E-mail](emanuel.developer82@gmail.com) emanuel.developer82@gmail.com <br/>
+🎱 – [Github](https://github.com/emanueldeveloper82) emanueldeveloper82 
 
 
 ## 📝 License
