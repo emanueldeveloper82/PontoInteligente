@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -32,7 +33,7 @@ public class Lancamento implements Serializable{
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LANCAMENTO_ID_LANCAMENTO_SEQ")
 	@SequenceGenerator(name="LANCAMENTO_ID_LANCAMENTO_SEQ", sequenceName="LANCAMENTO_ID_LANCAMENTO_SEQ", schema="PONTO_ELETRONICO", allocationSize=1)  	
 	@Column(name="ID_LANCAMENTO")
-	private Long idLancamento;
+	private Integer idLancamento;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="DATA_LANCAMENTO", nullable = false)
@@ -55,19 +56,19 @@ public class Lancamento implements Serializable{
 	private TipoLancamentoEnum tipoLancamentoEnum;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@Column(name="ID_FUNCIONARIO_FK", nullable = false)
+	@JoinColumn(name = "ID_FUNCIONARIO_FK")
 	private Funcionario funcionario;
 	
 	
 	public Lancamento() {}
 
 
-	public Long getIdLancamento() {
+	public Integer getIdLancamento() {
 		return idLancamento;
 	}
 
 
-	public void setIdLancamento(Long idLancamento) {
+	public void setIdLancamento(Integer idLancamento) {
 		this.idLancamento = idLancamento;
 	}
 

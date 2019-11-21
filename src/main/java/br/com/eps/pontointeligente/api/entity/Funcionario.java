@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -34,7 +35,7 @@ public class Funcionario implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FUNCIONARIO_ID_FUNCIONARIO_SEQ")
 	@SequenceGenerator(name="FUNCIONARIO_ID_FUNCIONARIO_SEQ", sequenceName="FUNCIONARIO_ID_FUNCIONARIO_SEQ", schema="PONTO_ELETRONICO", allocationSize=1)  	
 	@Column(name="ID_FUNCIONARIO")
-	private Long idFuncionario;
+	private Integer idFuncionario;
 	
 	@Column(name="NOME", nullable = false)
 	private String nome;
@@ -71,20 +72,20 @@ public class Funcionario implements Serializable {
 	private Date dataAtualizacao;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@Column(name="ID_EMPRESA_FK", nullable = false)
+	@JoinColumn(name = "ID_EMPRESA_FK")
 	private Empresa empresa;
 	
-	@OneToMany(mappedBy = "FUNCIONARIO", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Lancamento> lancamentos;
 	
 	
 	public Funcionario() {}
 
-	public Long getIdFuncionario() {
+	public Integer getIdFuncionario() {
 		return idFuncionario;
 	}
 
-	public void setIdFuncionario(Long idFuncionario) {
+	public void setIdFuncionario(Integer idFuncionario) {
 		this.idFuncionario = idFuncionario;
 	}
 

@@ -27,7 +27,7 @@ public class Empresa implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EMPRESA_ID_EMPRESA_SEQ")
 	@SequenceGenerator(name="EMPRESA_ID_EMPRESA_SEQ", sequenceName="EMPRESA_ID_EMPRESA_SEQ", schema="PONTO_ELETRONICO", allocationSize=1)  	
 	@Column(name="ID_EMPRESA")
-	private long idEmpresa;
+	private Integer idEmpresa;
 	
 	@Column(name="NUM_CNPJ", nullable = false )
 	private String numCnpj;
@@ -41,15 +41,15 @@ public class Empresa implements Serializable {
 	@Column(name="RAZAO_SOCIAL", nullable = false )
 	private String razaoSocial;
 
-	@OneToMany(mappedBy = "EMPRESA", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Funcionario> funcionarios;
 	
 	
-	public long getIdEmpresa() {
+	public Integer getIdEmpresa() {
 		return idEmpresa;
 	}
 
-	public void setIdEmpresa(long idEmpresa) {
+	public void setIdEmpresa(Integer idEmpresa) {
 		this.idEmpresa = idEmpresa;
 	}
 
