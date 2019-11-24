@@ -31,17 +31,12 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-security')
 	implementation 'org.springframework.boot:spring-boot-starter'	
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	compile group: 'com.h2database', name: 'h2', version: '1.4.200'
 	runtimeOnly('org.postgresql:postgresql')
 	compile "org.flywaydb:flyway-core:6.0.8"
-	testCompile group: 'com.h2database', name: 'h2', version: '1.4.200'
+	//testCompile group: 'com.h2database', name: 'h2', version: '1.4.200'
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation('org.springframework.security:spring-security-test')
-	//testImplementation('org.springframework.security:spring-security-test')
-	//testImplementation('org.springframework.boot:spring-boot-starter-test') {
-	//	exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	//}
-	
-	
 }
 
 test {

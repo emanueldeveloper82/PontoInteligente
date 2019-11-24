@@ -16,13 +16,13 @@ import br.com.eps.pontointeligente.api.entity.Lancamento;
 
 @Transactional(readOnly = true)
 @NamedQueries({
-	@NamedQuery(name = "LancamentoRepository.findByFuncionarioId", 
-			   query = "SELECT l FROM Lancamento l WHERE l.funcionario.id = :funcionarioId ")
+	@NamedQuery(name = "LancamentoRepository.findByIdFuncionario", 
+			   query = "SELECT l FROM Lancamento l WHERE l.funcionario.idFuncionario = :idFuncionario ")
 })
 public interface LancamentoRepository extends JpaRepository<Lancamento, Integer> {
 	
-	public List<Lancamento> findByFuncionarioId(@Param("idFuncionario") Integer funcionarioId);
+	public List<Lancamento> findByFuncionario(@Param("idFuncionario") Integer idFuncionario);
 	
-	public Page<Lancamento> findByFuncionarioId(@Param("idFuncionario") Integer funcionarioId, Pageable pageable);
+	public Page<Lancamento> findByFuncionario(@Param("idFuncionario") Integer idFuncionario, Pageable pageable);
 
 }

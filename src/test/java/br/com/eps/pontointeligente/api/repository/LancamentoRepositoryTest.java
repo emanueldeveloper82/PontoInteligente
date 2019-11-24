@@ -1,4 +1,6 @@
 package br.com.eps.pontointeligente.api.repository;
+
+
 import static org.junit.Assert.assertEquals;
 
 import java.security.NoSuchAlgorithmException;
@@ -12,17 +14,19 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import br.com.eps.pontointeligente.api.entity.Empresa;
 import br.com.eps.pontointeligente.api.entity.Funcionario;
 import br.com.eps.pontointeligente.api.entity.Lancamento;
 import br.com.eps.pontointeligente.api.enums.PerfilEnum;
 import br.com.eps.pontointeligente.api.enums.TipoLancamentoEnum;
 import br.com.eps.pontointeligente.api.utils.PasswordUtils;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -58,18 +62,19 @@ public class LancamentoRepositoryTest {
 
 	@Test
 	public void testBuscarLancamentosPorFuncionarioId() {
-		List<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionarioId(funcionarioId);
+		List<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionario(funcionarioId);
 		
 		assertEquals(2, lancamentos.size());
 	}
 	
 	@Test
 	public void testBuscarLancamentosPorFuncionarioIdPaginado() {
+//		Pageable page = new PageRequest(0, 10, Sort.by("funcionarioId"));
 		
 		Sort sort = Sort.by("funcionarioId"); 
 		Pageable page = PageRequest.of(0, 10, sort);
 		
-		Page<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionarioId(funcionarioId, page);
+		Page<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionario(funcionarioId, page);
 		
 		assertEquals(2, lancamentos.getTotalElements());
 	}
@@ -86,7 +91,7 @@ public class LancamentoRepositoryTest {
 		Funcionario funcionario = new Funcionario();
 		funcionario.setNome("Fulano de Tal");
 		funcionario.setPerfil(PerfilEnum.ROLE_USUARIO);
-		funcionario.setSenha(PasswordUtils.generateBCripty("123456"));
+		funcionario.setSenha(PasswordUtils.generateBCript("123456"));
 		funcionario.setNumCpf("24291173474");
 		funcionario.setEmail("email@email.com");
 		funcionario.setEmpresa(empresa);

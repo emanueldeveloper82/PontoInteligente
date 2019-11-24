@@ -139,7 +139,7 @@ public class Lancamento implements Serializable{
 
 
 	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+		this.funcionario = funcionario;		
 	}
 	
 	

@@ -54,28 +54,28 @@ public class FuncionarioRepositoryTest {
 
 	@Test
 	public void testBuscarFuncionarioPorCpf() {
-		Funcionario funcionario = this.funcionarioRepository.findByCpf(CPF);
+		Funcionario funcionario = this.funcionarioRepository.findByNumCpf(CPF);
 
 		assertEquals(CPF, funcionario.getNumCpf());
 	}
 
 	@Test
 	public void testBuscarFuncionarioPorEmailECpf() {
-		Funcionario funcionario = this.funcionarioRepository.findByCpfOrEmail(CPF, EMAIL);
+		Funcionario funcionario = this.funcionarioRepository.findByNumCpfOrEmail(CPF, EMAIL);
 
 		assertNotNull(funcionario);
 	}
 
 	@Test
 	public void testBuscarFuncionarioPorEmailOuCpfParaEmailInvalido() {
-		Funcionario funcionario = this.funcionarioRepository.findByCpfOrEmail(CPF, "email@invalido.com");
+		Funcionario funcionario = this.funcionarioRepository.findByNumCpfOrEmail(CPF, "email@invalido.com");
 
 		assertNotNull(funcionario);
 	}
 
 	@Test
 	public void testBuscarFuncionarioPorEmailECpfParaCpfInvalido() {
-		Funcionario funcionario = this.funcionarioRepository.findByCpfOrEmail("12345678901", EMAIL);
+		Funcionario funcionario = this.funcionarioRepository.findByNumCpfOrEmail("12345678901", EMAIL);
 
 		assertNotNull(funcionario);
 	}
@@ -84,7 +84,7 @@ public class FuncionarioRepositoryTest {
 		Funcionario funcionario = new Funcionario();
 		funcionario.setNome("Fulano de Tal");
 		funcionario.setPerfil(PerfilEnum.ROLE_USUARIO);
-		funcionario.setSenha(PasswordUtils.generateBCripty("123456"));
+		funcionario.setSenha(PasswordUtils.generateBCript("123456"));
 		funcionario.setNumCpf(CPF);
 		funcionario.setEmail(EMAIL);
 		funcionario.setEmpresa(empresa);
