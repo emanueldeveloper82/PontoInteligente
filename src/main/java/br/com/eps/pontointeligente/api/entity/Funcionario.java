@@ -35,7 +35,7 @@ public class Funcionario implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FUNCIONARIO_ID_FUNCIONARIO_SEQ")
 	@SequenceGenerator(name="FUNCIONARIO_ID_FUNCIONARIO_SEQ", sequenceName="FUNCIONARIO_ID_FUNCIONARIO_SEQ", schema="PONTO_ELETRONICO", allocationSize=1)  	
 	@Column(name="ID_FUNCIONARIO")
-	private Integer idFuncionario;
+	private Long idFuncionario;
 	
 	@Column(name="NOME", nullable = false)
 	private String nome;
@@ -81,11 +81,11 @@ public class Funcionario implements Serializable {
 	
 	public Funcionario() {}
 
-	public Integer getIdFuncionario() {
+	public Long getIdFuncionario() {
 		return idFuncionario;
 	}
 
-	public void setIdFuncionario(Integer idFuncionario) {
+	public void setIdFuncionario(Long idFuncionario) {
 		this.idFuncionario = idFuncionario;
 	}
 

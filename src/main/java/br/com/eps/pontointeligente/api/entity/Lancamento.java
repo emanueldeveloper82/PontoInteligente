@@ -33,7 +33,7 @@ public class Lancamento implements Serializable{
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LANCAMENTO_ID_LANCAMENTO_SEQ")
 	@SequenceGenerator(name="LANCAMENTO_ID_LANCAMENTO_SEQ", sequenceName="LANCAMENTO_ID_LANCAMENTO_SEQ", schema="PONTO_ELETRONICO", allocationSize=1)  	
 	@Column(name="ID_LANCAMENTO")
-	private Integer idLancamento;
+	private Long idLancamento;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="DATA_LANCAMENTO", nullable = false)
@@ -63,12 +63,12 @@ public class Lancamento implements Serializable{
 	public Lancamento() {}
 
 
-	public Integer getIdLancamento() {
+	public Long getIdLancamento() {
 		return idLancamento;
 	}
 
 
-	public void setIdLancamento(Integer idLancamento) {
+	public void setIdLancamento(Long idLancamento) {
 		this.idLancamento = idLancamento;
 	}
 

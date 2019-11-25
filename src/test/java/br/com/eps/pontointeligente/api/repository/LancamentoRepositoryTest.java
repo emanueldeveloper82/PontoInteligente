@@ -27,7 +27,6 @@ import br.com.eps.pontointeligente.api.enums.PerfilEnum;
 import br.com.eps.pontointeligente.api.enums.TipoLancamentoEnum;
 import br.com.eps.pontointeligente.api.utils.PasswordUtils;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
@@ -42,14 +41,14 @@ public class LancamentoRepositoryTest {
 	@Autowired
 	private EmpresaRepository empresaRepository;
 	
-	private Integer funcionarioId;
+	private Long idfuncionario;
 
 	@Before
 	public void setUp() throws Exception {
 		Empresa empresa = this.empresaRepository.save(obterDadosEmpresa());
 		
 		Funcionario funcionario = this.funcionarioRepository.save(obterDadosFuncionario(empresa));
-		this.funcionarioId = funcionario.getIdFuncionario();
+		this.idfuncionario = funcionario.getIdFuncionario();
 		
 		this.lancamentoRepository.save(obterDadosLancamentos(funcionario));
 		this.lancamentoRepository.save(obterDadosLancamentos(funcionario));
@@ -62,19 +61,19 @@ public class LancamentoRepositoryTest {
 
 	@Test
 	public void testBuscarLancamentosPorFuncionarioId() {
-		List<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionario(funcionarioId);
+		List<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionarioIdFuncionario(idfuncionario);
 		
 		assertEquals(2, lancamentos.size());
 	}
 	
 	@Test
 	public void testBuscarLancamentosPorFuncionarioIdPaginado() {
-//		Pageable page = new PageRequest(0, 10, Sort.by("funcionarioId"));
+		//Pageable page = new PageRequest(0, 10, Sort.by("funcionarioId"));
 		
-		Sort sort = Sort.by("funcionarioId"); 
+		Sort sort = Sort.by("FuncionarioIdFuncionario"); 
 		Pageable page = PageRequest.of(0, 10, sort);
 		
-		Page<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionario(funcionarioId, page);
+		Page<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionarioIdFuncionario(idfuncionario, page);
 		
 		assertEquals(2, lancamentos.getTotalElements());
 	}

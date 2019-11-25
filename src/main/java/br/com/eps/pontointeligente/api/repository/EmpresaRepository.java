@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.eps.pontointeligente.api.entity.Empresa;
 
-public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
+public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 	
 	@Transactional(readOnly = true)
 	public Empresa findByNumCnpj(String numCnpj);

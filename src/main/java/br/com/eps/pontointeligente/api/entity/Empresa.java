@@ -27,7 +27,7 @@ public class Empresa implements Serializable {
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EMPRESA_ID_EMPRESA_SEQ")
 	@SequenceGenerator(name="EMPRESA_ID_EMPRESA_SEQ", sequenceName="EMPRESA_ID_EMPRESA_SEQ", schema="PONTO_ELETRONICO", allocationSize=1)  	
 	@Column(name="ID_EMPRESA")
-	private Integer idEmpresa;
+	private Long idEmpresa;
 	
 	@Column(name="NUM_CNPJ", nullable = false )
 	private String numCnpj;
@@ -45,11 +45,11 @@ public class Empresa implements Serializable {
 	private List<Funcionario> funcionarios;
 	
 	
-	public Integer getIdEmpresa() {
+	public Long getIdEmpresa() {
 		return idEmpresa;
 	}
 
-	public void setIdEmpresa(Integer idEmpresa) {
+	public void setIdEmpresa(Long idEmpresa) {
 		this.idEmpresa = idEmpresa;
 	}
 

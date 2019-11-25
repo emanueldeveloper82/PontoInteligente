@@ -7,7 +7,7 @@ import br.com.eps.pontointeligente.api.entity.Funcionario;
 
 
 @Transactional(readOnly = true)
-public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer> {
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 	
 	public Funcionario findByNumCpf(String numCpf);
 	
