@@ -1,7 +1,7 @@
 -- CRIAÇÃO DAS TABELAS INICIAIS
 
 CREATE TABLE ponto_eletronico.empresa (
-	id_empresa serial NOT NULL,
+	id_empresa serial8 NOT NULL,
 	num_cnpj varchar NOT NULL,
 	data_criacao timestamp NOT NULL,
 	data_atualizacao timestamp NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE ponto_eletronico.empresa (
 );
 
 CREATE TABLE ponto_eletronico.funcionario (
-	id_funcionario serial NOT NULL,
+	id_funcionario serial8 NOT NULL,
 	num_cpf varchar NOT NULL,
 	email varchar NOT NULL,
     nome varchar NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE ponto_eletronico.funcionario (
 );
 
 CREATE TABLE ponto_eletronico.lancamento (
-	id_lancamento serial NOT NULL,
+	id_lancamento serial8 NOT NULL,
 	data_lancamento timestamp NOT NULL,
 	data_criacao timestamp NOT NULL,
 	data_atualizacao timestamp NOT NULL,	
