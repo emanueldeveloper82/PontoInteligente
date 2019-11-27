@@ -16,7 +16,7 @@
   			</sub>
   		</a>
   		  <br/>
-  		<a href="https://github.com/emanueldeveloper82/ponto-eletronico-api/commits?author=emanueldeveloper82" title="Code">
+  		<a href="https://github.com/emanueldeveloper82/PontoInteligente/commits?author=emanueldeveloper82" title="Code">
   		   💻
   		</a>
 	</td>
@@ -36,11 +36,11 @@
 ## 📝 License
 
 Copyright © 2019 [@emanueldeveloper](https://github.com/emanueldeveloper82).<br />
-This project is [MIT](https://github.com/emanueldeveloper82/ponto-eletronico-api/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/emanueldeveloper82/PontoInteligente/blob/master/LICENSE) licensed.
 
 
 
 
 <!-- Markdown link & img dfn's -->
-[travis-image]: https://img.shields.io/travis/emanueldeveloper82/ponto-eletronico-api/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/emanueldeveloper82/ponto-eletronico-api
+[travis-image]: https://img.shields.io/travis/emanueldeveloper82/PontoInteligente/master.svg?style=flat-square
+[travis-url]: https://travis-ci.org/emanueldeveloper82/PontoInteligente
