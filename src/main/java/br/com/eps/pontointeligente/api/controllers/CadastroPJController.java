@@ -25,6 +25,11 @@ import br.com.eps.pontointeligente.api.services.EmpresaService;
 import br.com.eps.pontointeligente.api.services.FuncionarioService;
 import br.com.eps.pontointeligente.api.utils.PasswordUtils;
 
+/**
+ * DTO para cadastro de pessoa juridica.
+ * @author emanuel developer
+ * 
+ */
 @RestController
 @RequestMapping("/api/cadastrar-pj")
 @CrossOrigin(origins = "*")
