@@ -49,17 +49,14 @@ public class Funcionario implements Serializable {
 	@Column(name="NUM_CPF", nullable = false)
 	private String numCpf;
 	
-	@Transient
 	@Column(name="VALOR_HORA", nullable = true)
-	private Optional<BigDecimal> valorHora;
+	private BigDecimal valorHora;
 	
-	@Transient
 	@Column(name = "QTD_HORAS_TRABALHO_DIA", nullable = true)
-	private Optional<Float> qtdHorasTrabalhoDia;
+	private Float qtdHorasTrabalhoDia;
 	
-	@Transient
 	@Column(name = "QTD_HORAS_ALMOCO", nullable = true)
-	private Optional<Float> qtdHorasAlmoco;
+	private Float qtdHorasAlmoco;
 	
 	@Enumerated( EnumType.STRING)
 	@Column(name="PERFIL", nullable = false)
@@ -121,28 +118,43 @@ public class Funcionario implements Serializable {
 		this.numCpf = numCpf;
 	}
 
-	public Optional<BigDecimal> getValorHora() {
+	public BigDecimal getValorHora() {
 		return valorHora;
 	}
 
-	public void setValorHora(Optional<BigDecimal> valorHora) {
+	public void setValorHora(BigDecimal valorHora) {
 		this.valorHora = valorHora;
 	}
+	
+	@Transient
+	public Optional<BigDecimal> getValorHoraOpt() {
+		return Optional.ofNullable(valorHora);
+	}
 
-	public Optional<Float> getQtdHorasTrabalhoDia() {
+	public Float getQtdHorasTrabalhoDia() {
 		return qtdHorasTrabalhoDia;
 	}
 
-	public void setQtdHorasTrabalhoDia(Optional<Float> qtdHorasTrabalhoDia) {
+	public void setQtdHorasTrabalhoDia(Float qtdHorasTrabalhoDia) {
 		this.qtdHorasTrabalhoDia = qtdHorasTrabalhoDia;
 	}
+	
+	@Transient
+	public Optional<Float> getQtdHorasTrabalhoDiaOpt() {
+		return Optional.ofNullable(qtdHorasTrabalhoDia);
+	}
 
-	public Optional<Float> getQtdHorasAlmoco() {
+	public Float getQtdHorasAlmoco() {
 		return qtdHorasAlmoco;
 	}
 
-	public void setQtdHorasAlmoco(Optional<Float> qtdHorasAlmoco) {
+	public void setQtdHorasAlmoco(Float qtdHorasAlmoco) {
 		this.qtdHorasAlmoco = qtdHorasAlmoco;
+	}
+	
+	@Transient
+	public Optional<Float> getQtdHorasAlmocoOpt() {
+		return Optional.ofNullable(qtdHorasAlmoco);
 	}
 
 	public PerfilEnum getPerfil() {
