@@ -16,7 +16,7 @@ import br.com.eps.pontointeligente.api.response.Response;
 import br.com.eps.pontointeligente.api.services.EmpresaService;
 
 /**
- * DTO Empresas.
+ * Controller de Empresas.
  * @author emanuel developer
  * 
  */

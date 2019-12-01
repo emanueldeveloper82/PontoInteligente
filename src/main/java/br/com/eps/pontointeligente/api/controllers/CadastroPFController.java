@@ -27,7 +27,7 @@ import br.com.eps.pontointeligente.api.services.FuncionarioService;
 import br.com.eps.pontointeligente.api.utils.PasswordUtils;
 
 /**
- * DTO para cadastro de pessoa física.
+ * Controller para cadastro de pessoa física.
  * @author emanuel developer
  * 
  */

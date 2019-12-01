@@ -23,7 +23,7 @@ import br.com.eps.pontointeligente.api.services.FuncionarioService;
 import br.com.eps.pontointeligente.api.utils.PasswordUtils;
 
 /**
- * DTO Funcionario.
+ * Controller de Funcionario.
  * @author emanuel developer
  * 
  */
