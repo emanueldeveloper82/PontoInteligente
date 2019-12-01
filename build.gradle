@@ -31,7 +31,8 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-security')
 	implementation('org.springframework.boot:spring-boot-starter-web')
 	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'org.springframework.boot:spring-boot-starter-validation:2.2.1.RELEASE'	
+	implementation 'org.springframework.boot:spring-boot-starter-validation:2.2.1.RELEASE'
+	implementation 'org.apache.commons:commons-lang3:3.6'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	compile group: 'com.h2database', name: 'h2', version: '1.4.200'
 	runtimeOnly('org.postgresql:postgresql')
@@ -39,6 +40,8 @@ dependencies {
 	//testCompile group: 'com.h2database', name: 'h2', version: '1.4.200'
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 	testImplementation('org.springframework.security:spring-security-test')
+	testImplementation('org.apache.commons:commons-lang3:3.6')
+	
 }
 
 test {
