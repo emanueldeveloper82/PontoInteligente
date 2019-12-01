@@ -133,7 +133,7 @@ public class CadastroPJController {
 		funcionario.setEmail(cadastroPJDto.getEmail());
 		funcionario.setNumCpf(cadastroPJDto.getCpf());
 		funcionario.setPerfil(PerfilEnum.ROLE_ADMIN);
-		funcionario.setSenha(PasswordUtils.generateBCript(cadastroPJDto.getSenha()));
+		funcionario.setSenha(PasswordUtils.generateBCrypt(cadastroPJDto.getSenha()));
 		
 		return funcionario;
 	}

@@ -10,7 +10,7 @@ public class PasswordUtils {
 	
 	public PasswordUtils() {}
 	
-	public static String generateBCript(String password) {
+	public static String generateBCrypt(String password) {
 		
 		if(password == null) {
 			return password;
