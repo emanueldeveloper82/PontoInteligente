@@ -92,9 +92,6 @@ public class LancamentoController {
 	/**
 	 * Retorna um lançamento por ID.
 	 * 
-	 * Está com erro quando busca um lançamento cujo ID nçao existe na base de dados.
-	 * jpa getone() throws entitynotfoundexception
-	 * 
 	 * @param id
 	 * @return ResponseEntity<Response<LancamentoDto>>
 	 */

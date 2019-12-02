@@ -1,11 +1,9 @@
 package br.com.eps.pontointeligente.api.services;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Optional;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -67,6 +65,6 @@ public class LancamentoServiceTest {
 	@Test
 	public void testarBuscarPorIdLancamento() {
 		Optional<Lancamento> lancamento = this.lancamentoService.buscarPorIdLancamento(1L);
-		assertTrue(lancamento.isPresent());		
+		assertNotNull(lancamento);
 	}
 }
