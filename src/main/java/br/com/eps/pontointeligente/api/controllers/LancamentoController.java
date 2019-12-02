@@ -36,7 +36,7 @@ import br.com.eps.pontointeligente.api.enums.TipoLancamentoEnum;
 import br.com.eps.pontointeligente.api.response.Response;
 import br.com.eps.pontointeligente.api.services.FuncionarioService;
 import br.com.eps.pontointeligente.api.services.LancamentoService;
-
+import br.com.eps.pontointeligente.api.exceptions.BadRequestException;
 /**
  * Controller de Lançamento.
  * @author emanuel developer
@@ -230,7 +230,7 @@ public class LancamentoController {
 			lancamentoDto.setDataLancamento(this.dateFormat.format(lancamento.getDataLancamento()));
 			lancamentoDto.setFuncionarioId(lancamento.getFuncionario().getIdFuncionario());
 		} catch (Exception e) {
-			return lancamentoDto = null;
+			throw new BadRequestException("Erro interno ao tentar converter para um Dto ");			
 		}		
 		
 		return lancamentoDto;
