@@ -1,7 +1,6 @@
 package br.com.eps.pontointeligente.api.services.impl;
 
 import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,6 @@ public class LancamentoServiceImpl implements LancamentoService {
 	@Override
 	public Optional<Lancamento> buscarPorIdLancamento(Long idLancamento) {
 		log.info("Buscar lançamento pelo id do lançamento {}", idLancamento);
-		return Optional.of(this.lancamentoRepository.getOne(idLancamento));
+		return Optional.ofNullable(this.lancamentoRepository.findById(idLancamento).orElse(null));
 	}
-
 }

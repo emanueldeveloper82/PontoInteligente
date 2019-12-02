@@ -5,9 +5,9 @@ import javax.validation.constraints.NotEmpty;
 
 public class LancamentoDto {
 	
-	private Optional<Long> id = Optional.empty();
+	private Optional<Long> idLancamento = Optional.empty();
 	@NotEmpty(message="O campo Data não pod eser vazio.")
-	private String data;
+	private String dataLancamento;
 	private String tipoLancamento;
 	private String descricao;
 	private String localizacao;
@@ -15,20 +15,20 @@ public class LancamentoDto {
 	
 	public LancamentoDto() {}
 
-	public Optional<Long> getId() {
-		return id;
+	public Optional<Long> getIdLancamento() {
+		return idLancamento;
 	}
 
-	public void setId(Optional<Long> id) {
-		this.id = id;
+	public void setIdLancamento(Optional<Long> idLancamento) {
+		this.idLancamento = idLancamento;
 	}
 
-	public String getData() {
-		return data;
+	public String getDataLancamento() {
+		return dataLancamento;
 	}
 
-	public void setData(String data) {
-		this.data = data;
+	public void setDataLancamento(String dataLancamento) {
+		this.dataLancamento = dataLancamento;
 	}
 
 	public String getTipoLancamento() {
@@ -65,7 +65,7 @@ public class LancamentoDto {
 
 	@Override
 	public String toString() {
-		return "LancamentoDto [id=" + id + ", data=" + data + ", tipoLancamento=" + tipoLancamento + ", descricao="
+		return "LancamentoDto [id=" + idLancamento + ", data=" + dataLancamento + ", tipoLancamento=" + tipoLancamento + ", descricao="
 				+ descricao + ", localizacao=" + localizacao + ", funcionarioId=" + funcionarioId + "]";
 	}
 

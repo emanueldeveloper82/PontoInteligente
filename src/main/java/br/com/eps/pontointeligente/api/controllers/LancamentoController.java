@@ -92,16 +92,22 @@ public class LancamentoController {
 	/**
 	 * Retorna um lançamento por ID.
 	 * 
+	 * Está com erro quando busca um lançamento cujo ID nçao existe na base de dados.
+	 * jpa getone() throws entitynotfoundexception
+	 * 
 	 * @param id
 	 * @return ResponseEntity<Response<LancamentoDto>>
 	 */
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Response<LancamentoDto>> listarPorId(@PathVariable("id") Long id) {
-		log.info("Buscando lançamento por ID: {}", id);
+		
+		log.info("Buscando lançamento por ID {}", id);
+		
 		Response<LancamentoDto> response = new Response<LancamentoDto>();
+		
 		Optional<Lancamento> lancamento = this.lancamentoService.buscarPorIdLancamento(id);
-
-		if (!lancamento.isPresent()) {
+		
+		if ( !lancamento.isPresent() ) {
 			log.info("Lançamento não encontrado para o ID: {}", id);
 			response.getErrors().add("Lançamento não encontrado para o id " + id);
 			return ResponseEntity.badRequest().body(response);
@@ -153,7 +159,7 @@ public class LancamentoController {
 		log.info("Atualizando lançamento: {}", lancamentoDto.toString());
 		Response<LancamentoDto> response = new Response<LancamentoDto>();
 		validarFuncionario(lancamentoDto, result);
-		lancamentoDto.setId(Optional.of(id));
+		lancamentoDto.setIdLancamento(Optional.of(id));
 		Lancamento lancamento = this.converterDtoParaLancamento(lancamentoDto, result);
 
 		if (result.hasErrors()) {
@@ -218,13 +224,18 @@ public class LancamentoController {
 	 */
 	private LancamentoDto converterLancamentoDto(Lancamento lancamento) {
 		LancamentoDto lancamentoDto = new LancamentoDto();
-		lancamentoDto.setId(Optional.of(lancamento.getIdLancamento()));
-		lancamentoDto.setData(this.dateFormat.format(lancamento.getDataLancamento()));
-		lancamentoDto.setTipoLancamento(lancamento.getTipoLancamentoEnum().toString());
-		lancamentoDto.setDescricao(lancamento.getDescricao());
-		lancamentoDto.setLocalizacao(lancamento.getLocalizacao());
-		lancamentoDto.setFuncionarioId(lancamento.getFuncionario().getIdFuncionario());
-
+		
+		try {
+			lancamentoDto.setIdLancamento(Optional.of(lancamento.getIdLancamento()));		
+			lancamentoDto.setTipoLancamento(lancamento.getTipoLancamentoEnum().toString());
+			lancamentoDto.setDescricao(lancamento.getDescricao());
+			lancamentoDto.setLocalizacao(lancamento.getLocalizacao());
+			lancamentoDto.setDataLancamento(this.dateFormat.format(lancamento.getDataLancamento()));
+			lancamentoDto.setFuncionarioId(lancamento.getFuncionario().getIdFuncionario());
+		} catch (Exception e) {
+			return lancamentoDto = null;
+		}		
+		
 		return lancamentoDto;
 	}
 	
@@ -239,8 +250,8 @@ public class LancamentoController {
 	private Lancamento converterDtoParaLancamento(LancamentoDto lancamentoDto, BindingResult result) throws ParseException {
 		Lancamento lancamento = new Lancamento();
 
-		if (lancamentoDto.getId().isPresent()) {
-			Optional<Lancamento> lanc = this.lancamentoService.buscarPorIdLancamento(lancamentoDto.getId().get());
+		if (lancamentoDto.getIdLancamento().isPresent()) {
+			Optional<Lancamento> lanc = this.lancamentoService.buscarPorIdLancamento(lancamentoDto.getIdLancamento().get());
 			if (lanc.isPresent()) {
 				lancamento = lanc.get();
 			} else {
@@ -253,7 +264,7 @@ public class LancamentoController {
 
 		lancamento.setDescricao(lancamentoDto.getDescricao());
 		lancamento.setLocalizacao(lancamentoDto.getLocalizacao());
-		lancamento.setDataLancamento(this.dateFormat.parse(lancamentoDto.getData()));
+		lancamento.setDataLancamento(this.dateFormat.parse(lancamentoDto.getDataLancamento()));
 
 		if (EnumUtils.isValidEnum(TipoLancamentoEnum.class, lancamentoDto.getTipoLancamento())) {
 			lancamento.setTipoLancamentoEnum(TipoLancamentoEnum.valueOf(lancamentoDto.getTipoLancamento()));
