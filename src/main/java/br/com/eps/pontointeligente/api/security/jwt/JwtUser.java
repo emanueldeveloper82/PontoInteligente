@@ -5,10 +5,11 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+
 public class JwtUser implements UserDetails {
 
+//	private static final long serialVersionUID = -268046329085485932L;
 	private static final long serialVersionUID = 1L;
-	
 	
 	private Long id;
 	private String userName;
@@ -17,7 +18,6 @@ public class JwtUser implements UserDetails {
 	
 
 	public JwtUser(Long id, String userName, String password, Collection<? extends GrantedAuthority> authorities) {
-		super();
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
@@ -29,7 +29,8 @@ public class JwtUser implements UserDetails {
 		return this.id;
 	}
 	
-	public String getUserName() {
+	@Override
+	public String getUsername() {
 		return this.userName;
 	}
 
@@ -44,29 +45,23 @@ public class JwtUser implements UserDetails {
 	}
 
 	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return true;
 	}
 
 }

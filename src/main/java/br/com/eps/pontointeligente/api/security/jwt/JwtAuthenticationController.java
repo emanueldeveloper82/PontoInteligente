@@ -24,6 +24,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eps.pontointeligente.api.response.Response;
+import br.com.eps.pontointeligente.api.security.jwt.JwtAuthenticationDto;
+import br.com.eps.pontointeligente.api.security.jwt.JwtTokenDto;
+import br.com.eps.pontointeligente.api.security.jwt.JwtTokenUtil;
+
 
 @RestController
 @RequestMapping("/auth")
@@ -64,8 +68,11 @@ public class JwtAuthenticationController {
 		}
 
 		log.info("Gerando token para o email {}.", authenticationDto.getEmail());
-		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-				authenticationDto.getEmail(), authenticationDto.getSenha()));
+		
+		Authentication authentication = authenticationManager
+				.authenticate(new UsernamePasswordAuthenticationToken( 
+						authenticationDto.getEmail(), authenticationDto.getSenha()) );
+		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 
 		UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationDto.getEmail());

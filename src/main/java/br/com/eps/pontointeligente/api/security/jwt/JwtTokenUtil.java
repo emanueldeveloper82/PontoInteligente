@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.eps.pontointeligente.api.entity.Funcionario;
 import br.com.eps.pontointeligente.api.repository.FuncionarioRepository;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
