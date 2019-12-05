@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Optional;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.BDDMockito;
@@ -42,6 +43,7 @@ public class EmpresaControllerTest {
 	
 	
 	@Test
+	@WithMockUser
 	public void testBuscarEmpresaCnpjInvalido() throws Exception {
 		BDDMockito.given(this.empresaService.buscarPorNumCnpj(Mockito.anyString())).willReturn(Optional.empty());
 
@@ -52,6 +54,7 @@ public class EmpresaControllerTest {
 	}
 	
 	@Test
+	@WithMockUser
 	public void testBuscarEmpresaCnpjValido() throws Exception {
 		
 		BDDMockito.given(this.empresaService.buscarPorNumCnpj(Mockito.anyString()))

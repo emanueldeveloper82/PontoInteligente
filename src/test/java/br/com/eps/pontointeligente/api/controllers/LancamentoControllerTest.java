@@ -99,18 +99,17 @@ public class LancamentoControllerTest {
 	}
 	
 	
-	//Este teste apenas com o módulo de autenticação
-//	@Test
-//	@WithMockUser
-//	public void testRemoverLancamentoAcessoNegado() throws Exception {
-//		
-//		BDDMockito.given(this.lancamentoService.buscarPorIdLancamento(Mockito.anyLong()))
-//		.willReturn(Optional.of(new Lancamento()));
-//
-//		mockMvc.perform(MockMvcRequestBuilders.delete(URL_BASE + ID_LANCAMENTO)
-//				.accept(MediaType.APPLICATION_JSON))
-//				.andExpect(status().isForbidden());
-//	}
+	@Test
+	@WithMockUser
+	public void testRemoverLancamentoAcessoNegado() throws Exception {
+		
+		BDDMockito.given(this.lancamentoService.buscarPorIdLancamento(Mockito.anyLong()))
+		.willReturn(Optional.of(new Lancamento()));
+
+		mockMvc.perform(MockMvcRequestBuilders.delete(URL_BASE + ID_LANCAMENTO)
+				.accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isForbidden());
+	}
 
 	private String obterJsonRequisicaoPost() throws JsonProcessingException {
 		LancamentoDto lancamentoDto = new LancamentoDto();
