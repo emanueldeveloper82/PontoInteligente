@@ -1,5 +1,7 @@
 package br.com.eps.pontointeligente.api.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,5 +16,7 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> 
 	public Funcionario findByEmail(String email);
 	
 	public Funcionario findByNumCpfOrEmail(String numCpf, String email);
+	
+	List<Funcionario> findByEmpresaIdEmpresa(Long id);
 
 }

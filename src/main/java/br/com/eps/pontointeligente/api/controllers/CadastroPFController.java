@@ -25,12 +25,15 @@ import br.com.eps.pontointeligente.api.response.Response;
 import br.com.eps.pontointeligente.api.services.EmpresaService;
 import br.com.eps.pontointeligente.api.services.FuncionarioService;
 import br.com.eps.pontointeligente.api.utils.PasswordUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * Controller para cadastro de pessoa física.
  * @author emanuel developer
  * 
  */
+@Api(value = "API de cadastro de Pessoa Física.")
 @RestController
 @RequestMapping("/api/cadastrar-pf")
 @CrossOrigin(origins = "*")

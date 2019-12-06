@@ -2,7 +2,10 @@ package br.com.eps.pontointeligente.api.controllers;
 
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,12 +25,15 @@ import br.com.eps.pontointeligente.api.entity.Funcionario;
 import br.com.eps.pontointeligente.api.response.Response;
 import br.com.eps.pontointeligente.api.services.FuncionarioService;
 import br.com.eps.pontointeligente.api.utils.PasswordUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * Controller de Funcionario.
  * @author emanuel developer
  * 
  */
+@Api(value = "API de Funcionário.")
 @RestController
 @RequestMapping("/api/funcionarios")
 @CrossOrigin(origins = "*")
@@ -48,6 +55,7 @@ public class FuncionarioController {
 	 * @return ResponseEntity<Response<FuncionarioDto>>
 	 * @throws NoSuchAlgorithmException
 	 */
+	@ApiOperation(value = "Atualiza dados do funcionário.")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Response<FuncionarioDto>> atualizar(@PathVariable("id") Long id,
 			@Valid @RequestBody FuncionarioDto funcionarioDto, BindingResult result) throws NoSuchAlgorithmException {
@@ -73,24 +81,25 @@ public class FuncionarioController {
 		return ResponseEntity.ok(response);
 	}
 	
-//	/**
-//	 * 
-//	 * @param id
-//	 * @return ResponseEntity<Response<List<FuncionarioDto>>>
-//	 */
-//	@GetMapping(value = "/empresa/{id}")
-//	public ResponseEntity<Response<List<FuncionarioDto>>> atualizar(@PathVariable("id") Long id) {
-//		log.info("Buscando funcionários por id de empresa: {}", id);
-//		Response<List<FuncionarioDto>> response = new Response<List<FuncionarioDto>>();
-//
-//		List<Funcionario> funcionarios = funcionarioService. buscarPorEmpresaId(id);
-//
-//		response.setData(funcionarios.stream()
-//				.map(func -> converterFuncionarioDto(func))
-//				.collect(Collectors.toList()));
-//
-//		return ResponseEntity.ok(response);
-//	}
+	/**
+	 * 
+	 * @param id
+	 * @return ResponseEntity<Response<List<FuncionarioDto>>>
+	 */
+	@ApiOperation(value = "Buscar funcionário pela empresa.")
+	@GetMapping(value = "/empresa/{id}")
+	public ResponseEntity<Response<List<FuncionarioDto>>> atualizar(@PathVariable("id") Long id) {
+		log.info("Buscando funcionários por id de empresa: {}", id);
+		Response<List<FuncionarioDto>> response = new Response<List<FuncionarioDto>>();
+
+		List<Funcionario> funcionarios = funcionarioService.buscarPorIdEmpresa(id);
+
+		response.setData(funcionarios.stream()
+				.map(func -> converterFuncionarioDto(func))
+				.collect(Collectors.toList()));
+
+		return ResponseEntity.ok(response);
+	}
 
 	/**
 	 * Atualiza os dados do funcionário com base nos dados encontrados no DTO.

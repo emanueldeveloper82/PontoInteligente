@@ -1,5 +1,6 @@
 package br.com.eps.pontointeligente.api.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -43,6 +44,12 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	public Optional<Funcionario> buscarPorId(Long idFuncionario) {
 		log.info("Buscando um Funcionário pelo id {}", idFuncionario);
 		return Optional.ofNullable(this.funcionarioRepository.getOne(idFuncionario) );
+	}
+
+	@Override
+	public List<Funcionario> buscarPorIdEmpresa(Long idEmpresa) {
+		log.info("Buscando funcionários pela empresa ID {}", idEmpresa);
+		return funcionarioRepository.findByEmpresaIdEmpresa(idEmpresa);
 	}
 
 }

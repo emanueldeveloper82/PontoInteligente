@@ -14,12 +14,15 @@ import br.com.eps.pontointeligente.api.dtos.EmpresaDto;
 import br.com.eps.pontointeligente.api.entity.Empresa;
 import br.com.eps.pontointeligente.api.response.Response;
 import br.com.eps.pontointeligente.api.services.EmpresaService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * Controller de Empresas.
  * @author emanuel developer
  * 
  */
+@Api(value = "API de Empresa.")
 @RestController
 @RequestMapping("/api/empresas")
 @CrossOrigin(origins = "*")
@@ -38,6 +41,7 @@ public class EmpresaController {
 	 * @param cnpj
 	 * @return ResponseEntity<Response<EmpresaDto>>
 	 */
+	@ApiOperation(value = "Buscar uma empresa pelo CNPJ.")
 	@GetMapping("/cnpj/{cnpj}")
 	public ResponseEntity<Response<EmpresaDto>> buscarPorCnpj(@PathVariable("cnpj") String cnpj) {
 		
