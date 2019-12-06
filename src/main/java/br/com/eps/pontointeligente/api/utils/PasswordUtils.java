@@ -24,5 +24,12 @@ public class PasswordUtils {
 	}
 	
 	
+	
+	/** CRIPTOGRAFANDO A SENHA PARA TESTE   DEIXAR COMENTADO E DESCOMENTAR SOMENTE QUANDO NECESSARIO*/
+	/**EXECUTAR COM JAVA APPLICATION E PEGAR O VALOR DA SENHA NO LOG*/
+//	public static void main(String[] args) {
+//		System.out.println(new BCryptPasswordEncoder().encode("admin@123"));
+//	}
+	
 
 }
