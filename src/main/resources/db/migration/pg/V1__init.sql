@@ -1,6 +1,6 @@
 -- CRIAÇÃO DAS TABELAS INICIAIS
 
-CREATE TABLE ponto_eletronico.empresa (
+CREATE TABLE empresa (
 	id_empresa serial8 NOT NULL,
 	num_cnpj varchar NOT NULL,
 	data_criacao timestamp NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE ponto_eletronico.empresa (
 	CONSTRAINT empresa_un UNIQUE (num_cnpj)
 );
 
-CREATE TABLE ponto_eletronico.funcionario (
+CREATE TABLE funcionario (
 	id_funcionario serial8 NOT NULL,
 	num_cpf varchar NOT NULL,
 	email varchar NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE ponto_eletronico.funcionario (
 	CONSTRAINT funcionario_empresa_fk FOREIGN KEY (id_empresa_fk) REFERENCES ponto_eletronico.empresa(id_empresa)
 );
 
-CREATE TABLE ponto_eletronico.lancamento (
+CREATE TABLE lancamento (
 	id_lancamento serial8 NOT NULL,
 	data_lancamento timestamp NOT NULL,
 	data_criacao timestamp NOT NULL,
