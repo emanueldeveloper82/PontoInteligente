@@ -1,0 +1,1 @@
+web: java -Dserver.port=$PORT $JAVA_OPTS -Dspring.profiles.active=prod -jar build/libs/ponto-eletrinico-v1.0.0.jar
