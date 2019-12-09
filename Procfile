@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -Dspring.profiles.active=prod -jar build/libs/PontoInteligente-0.0.1-SNAPSHOT
+web: java -Dserver.port=$PORT -Dspring.profiles.active=prod -jar build/libs/PontoInteligente-0.0.1-SNAPSHOT
