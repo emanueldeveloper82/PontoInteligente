@@ -1,5 +1,6 @@
 package br.com.eps.pontointeligente.api.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -42,5 +43,22 @@ public interface LancamentoService {
 	 * @return Optional<Lancamento>
 	 */
 	Optional<Lancamento> buscarPorIdLancamento(Long idLancamento);
+	
+	
+	/**
+	 * Retorna o último lançamento por ID de funcionário.
+	 *
+	 * @param funcionarioId
+	 * @return Optional<Lancamento>
+	 */
+    Optional<Lancamento> buscarUltimoPorFuncionarioId(Long funcionarioId);
+
+	/**
+	 * Retorna uma lista com todos os lançamentos de um determinado funcionário.
+	 *
+	 * @param funcionarioId
+	 * @return List<Lancamento>
+	 */
+    List<Lancamento> buscarTodosPorFuncionarioId(Long funcionarioId);
 
 }

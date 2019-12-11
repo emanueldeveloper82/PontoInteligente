@@ -1,5 +1,6 @@
 package br.com.eps.pontointeligente.api.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,5 +47,17 @@ public class LancamentoServiceImpl implements LancamentoService {
 	public Optional<Lancamento> buscarPorIdLancamento(Long idLancamento) {
 		log.info("Buscar lançamento pelo id do lançamento {}", idLancamento);
 		return Optional.ofNullable(this.lancamentoRepository.findById(idLancamento).orElse(null));
+	}
+	
+	public List<Lancamento> buscarTodosPorFuncionarioId(Long funcionarioId) {
+		log.info("Buscando todos os lançamentos para o funcionário ID {}", funcionarioId);
+		return this.lancamentoRepository.findByFuncionarioIdFuncionarioOrderByDataLancamentoDesc(funcionarioId);
+	}
+	
+	@Override
+	public Optional<Lancamento> buscarUltimoPorFuncionarioId(Long funcionarioId) {
+		log.info("Buscando o último lançamento por ID de funcionário {}", funcionarioId);
+		return Optional.ofNullable(
+				this.lancamentoRepository.findFirstByFuncionarioIdFuncionarioOrderByDataCriacaoDesc(funcionarioId));
 	}
 }
