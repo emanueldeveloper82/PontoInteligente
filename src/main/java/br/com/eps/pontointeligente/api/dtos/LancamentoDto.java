@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 public class LancamentoDto {
 	
 	private Optional<Long> idLancamento = Optional.empty();
-	@NotEmpty(message="O campo Data não pod eser vazio.")
+	@NotEmpty(message="O campo Data não pode ser vazio.")
 	private String dataLancamento;
 	private String tipoLancamento;
 	private String descricao;
