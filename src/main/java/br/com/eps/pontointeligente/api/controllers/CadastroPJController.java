@@ -1,9 +1,14 @@
 package br.com.eps.pontointeligente.api.controllers;
 
-import java.security.NoSuchAlgorithmException;
-
-import javax.validation.Valid;
-
+import br.com.eps.pontointeligente.api.dtos.CadastroPJDto;
+import br.com.eps.pontointeligente.api.entity.Empresa;
+import br.com.eps.pontointeligente.api.entity.Funcionario;
+import br.com.eps.pontointeligente.api.enums.PerfilEnum;
+import br.com.eps.pontointeligente.api.response.Response;
+import br.com.eps.pontointeligente.api.services.EmpresaService;
+import br.com.eps.pontointeligente.api.services.FuncionarioService;
+import br.com.eps.pontointeligente.api.utils.PasswordUtils;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.com.eps.pontointeligente.api.dtos.CadastroPJDto;
-import br.com.eps.pontointeligente.api.entity.Empresa;
-import br.com.eps.pontointeligente.api.entity.Funcionario;
-import br.com.eps.pontointeligente.api.enums.PerfilEnum;
-import br.com.eps.pontointeligente.api.response.Response;
-import br.com.eps.pontointeligente.api.services.EmpresaService;
-import br.com.eps.pontointeligente.api.services.FuncionarioService;
-import br.com.eps.pontointeligente.api.utils.PasswordUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.security.NoSuchAlgorithmException;
+import javax.validation.Valid;
 
 /**
  * Controller para cadastro de pessoa juridica.
@@ -68,7 +64,7 @@ public class CadastroPJController {
 		Funcionario funcionario = this.converteDtoParaFuncionario(cadastroPJDto);
 		
 		/**verifica se existe erros de validação.*/
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			log.error("Erro ao validar cadastro de PJ: {}", result.getAllErrors());
 			result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
 			return ResponseEntity.badRequest().body(response);
@@ -93,14 +89,19 @@ public class CadastroPJController {
 		
 		log.info("Validando dados existentes de PJ: {}", cadastroPJDto.toString());
 		
-		this.empresaService.buscarPorNumCnpj(cadastroPJDto.getCnpj()).ifPresent( 
-				emp -> result.addError(new ObjectError("empresa", "Já existe uma empresa com este CNPJ.")) );
+		this.empresaService.buscarPorNumCnpj(cadastroPJDto.getCnpj())
+				.ifPresent(emp -> result
+						.addError(new ObjectError("empresa",
+								"Já existe uma empresa com este CNPJ.")));
 		
-		this.funcionarioService.buscarFuncionarioPorNumCpf(cadastroPJDto.getCpf()).ifPresent(
-				func -> result.addError(new ObjectError("Funcionario", "Já existe um funcionário com este CPF.")) );
+		this.funcionarioService.buscarFuncionarioPorNumCpf(cadastroPJDto.getCpf())
+				.ifPresent(func -> result
+						.addError(new ObjectError("Funcionario",
+								"Já existe um funcionário com este CPF.")));
 		
-		this.funcionarioService.buscarFuncionarioPorEmail(cadastroPJDto.getEmail()).ifPresent(
-				func -> result.addError(new ObjectError("Funcionario", "Já existe um funcionário com este E-mail.")) );
+		this.funcionarioService.buscarFuncionarioPorEmail(cadastroPJDto.getEmail())
+				.ifPresent(func -> result.addError(new ObjectError("Funcionario",
+						"Já existe um funcionário com este E-mail.")));
 	}
 	
 	

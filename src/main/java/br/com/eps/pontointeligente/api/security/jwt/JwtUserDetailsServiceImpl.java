@@ -1,15 +1,13 @@
 package br.com.eps.pontointeligente.api.security.jwt;
 
-import java.util.Optional;
-
+import br.com.eps.pontointeligente.api.entity.Funcionario;
+import br.com.eps.pontointeligente.api.services.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import br.com.eps.pontointeligente.api.entity.Funcionario;
-import br.com.eps.pontointeligente.api.services.FuncionarioService;
+import java.util.Optional;
 
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
@@ -24,7 +22,6 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 		if (funcionario.isPresent()) {
 			return JwtUserFactory.create(funcionario.get());
 		}
-
 		throw new UsernameNotFoundException("Email não encontrado.");
 	}
 

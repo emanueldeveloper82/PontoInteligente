@@ -1,16 +1,12 @@
 package br.com.eps.pontointeligente.api.security.jwt;
 
-import java.util.Collection;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import java.util.Collection;
 
 public class JwtUser implements UserDetails {
 
-//	private static final long serialVersionUID = -268046329085485932L;
 	private static final long serialVersionUID = 1L;
-	
 	private Long id;
 	private String userName;
 	private String password;
@@ -23,8 +19,7 @@ public class JwtUser implements UserDetails {
 		this.password = password;
 		this.authorities = authorities;
 	}
-	
-	
+
 	public Long getId() {
 		return this.id;
 	}

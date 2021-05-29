@@ -1,14 +1,12 @@
-package br.com.eps.pontointeligente.api.swagger ;
+package br.com.eps.pontointeligente.api.swagger;
 
+import br.com.eps.pontointeligente.api.security.jwt.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
-import br.com.eps.pontointeligente.api.security.jwt.JwtTokenUtil;
-
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -34,7 +32,8 @@ public class SwaggerConfig {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("br.com.eps.pontointeligente.api.controllers"))
+				.apis(RequestHandlerSelectors
+					.basePackage("br.com.eps.pontointeligente.api.controllers"))
 				.paths(PathSelectors.any()).build()
 				.apiInfo(apiInfo());
 	}
@@ -45,7 +44,9 @@ public class SwaggerConfig {
 				.version("1.0")
 				.license("Apache License Version 2.0")
 				.licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
-				.contact(new Contact("Emanuel Developer", "https://github.com/emanueldeveloper82/PontoInteligente", "emanuel.developer82@gmail.com"))
+				.contact(new Contact("Emanuel Developer",
+						"https://github.com/emanueldeveloper82/PontoInteligente",
+						"emanuel.developer82@gmail.com"))
 				.build();
 	}
 

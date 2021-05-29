@@ -1,5 +1,7 @@
 package br.com.eps.pontointeligente.api.security;
 
+import br.com.eps.pontointeligente.api.security.jwt.JwtAuthenticationEntryPoint;
+import br.com.eps.pontointeligente.api.security.jwt.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,9 +18,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import br.com.eps.pontointeligente.api.security.jwt.JwtAuthenticationEntryPoint;
-import br.com.eps.pontointeligente.api.security.jwt.JwtAuthenticationTokenFilter;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -31,8 +30,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private UserDetailsService userDetailsService;
 
 	@Autowired
-	public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-		authenticationManagerBuilder.userDetailsService(this.userDetailsService).passwordEncoder(passwordEncoder());
+	public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder)
+			throws Exception {
+		authenticationManagerBuilder
+				.userDetailsService(this.userDetailsService)
+				.passwordEncoder(passwordEncoder());
 	}
 
 	@Bean
@@ -53,13 +55,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+		httpSecurity.csrf().disable()
+				.exceptionHandling()
+				.authenticationEntryPoint(unauthorizedHandler)
+				.and()
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and().authorizeRequests()
 				.antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-				.antMatchers("/auth/**", "/api/cadastrar-pj", "/api/cadastrar-pf", "/v2/api-docs",
-						"/swagger-resources/**", "/configuration/security", "/swagger-ui.html", "/webjars/**")
+				.antMatchers("/auth/**",
+						"/api/cadastrar-pj",
+						"/api/cadastrar-pf", "/v2/api-docs",
+						"/swagger-resources/**",
+						"/configuration/security",
+						"/swagger-ui.html", "/webjars/**")
 				.permitAll().anyRequest().authenticated();
-		httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+		httpSecurity
+				.addFilterBefore(authenticationTokenFilterBean(),
+						UsernamePasswordAuthenticationFilter.class);
 		httpSecurity.headers().cacheControl();
 	}
 

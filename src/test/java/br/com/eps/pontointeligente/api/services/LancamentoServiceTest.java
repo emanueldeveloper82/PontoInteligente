@@ -23,7 +23,7 @@ import br.com.eps.pontointeligente.api.entity.Lancamento;
 import br.com.eps.pontointeligente.api.repository.LancamentoRepository;
 
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
+@ActiveProfiles("prod")
 @SpringBootTest
 public class LancamentoServiceTest {
 	

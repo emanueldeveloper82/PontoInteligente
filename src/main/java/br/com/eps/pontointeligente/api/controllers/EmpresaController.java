@@ -1,6 +1,11 @@
 package br.com.eps.pontointeligente.api.controllers;
 
-import java.util.Optional;
+import br.com.eps.pontointeligente.api.dtos.EmpresaDto;
+import br.com.eps.pontointeligente.api.entity.Empresa;
+import br.com.eps.pontointeligente.api.response.Response;
+import br.com.eps.pontointeligente.api.services.EmpresaService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.eps.pontointeligente.api.dtos.EmpresaDto;
-import br.com.eps.pontointeligente.api.entity.Empresa;
-import br.com.eps.pontointeligente.api.response.Response;
-import br.com.eps.pontointeligente.api.services.EmpresaService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.util.Optional;
 
 /**
  * Controller de Empresas.
@@ -52,7 +52,7 @@ public class EmpresaController {
 
 		if (!empresa.isPresent()) {
 			log.info("Empresa não localizada pelo CNPJ: {}", cnpj);
-			response.getErrors().add("Empresa não localizada pelo CNPJ "+ cnpj);
+			response.getErrors().add("Empresa não localizada pelo CNPJ " + cnpj);
 			return ResponseEntity.badRequest().body(response);
 		}
 		

@@ -1,11 +1,10 @@
 package br.com.eps.pontointeligente.api.dtos;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CNPJ;
 import org.hibernate.validator.constraints.br.CPF;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 public class CadastroPJDto {
 	
@@ -96,7 +95,8 @@ public class CadastroPJDto {
 
 	@Override
 	public String toString() {
-		return "CadastroPJDto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
+		return "CadastroPJDto [id=" + id + ", nome=" + nome
+				+ ", email=" + email + ", senha=" + senha + ", cpf=" + cpf
 				+ ", razaoSocial=" + razaoSocial + ", cnpj=" + cnpj + "]";
 	}
 	

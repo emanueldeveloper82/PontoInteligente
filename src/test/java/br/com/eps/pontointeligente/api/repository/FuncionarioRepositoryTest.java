@@ -22,7 +22,7 @@ import br.com.eps.pontointeligente.api.utils.PasswordUtils;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("test")
+@ActiveProfiles("prod")
 public class FuncionarioRepositoryTest {
 
 	@Autowired

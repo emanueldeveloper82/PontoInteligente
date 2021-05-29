@@ -20,7 +20,7 @@ import br.com.eps.pontointeligente.api.entity.Funcionario;
 import br.com.eps.pontointeligente.api.repository.FuncionarioRepository;
 
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
+@ActiveProfiles("prod")
 @SpringBootTest
 public class FuncionarioServiceTest {
 

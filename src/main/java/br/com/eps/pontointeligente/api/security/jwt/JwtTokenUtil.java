@@ -1,20 +1,17 @@
 package br.com.eps.pontointeligente.api.security.jwt;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-
+import br.com.eps.pontointeligente.api.entity.Funcionario;
+import br.com.eps.pontointeligente.api.repository.FuncionarioRepository;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
-import br.com.eps.pontointeligente.api.entity.Funcionario;
-import br.com.eps.pontointeligente.api.repository.FuncionarioRepository;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class JwtTokenUtil {

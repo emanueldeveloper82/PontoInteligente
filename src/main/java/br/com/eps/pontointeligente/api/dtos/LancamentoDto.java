@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 public class LancamentoDto {
 	
 	private Optional<Long> idLancamento = Optional.empty();
-	@NotEmpty(message="O campo Data não pode ser vazio.")
+	@NotEmpty(message = "O campo Data não pode ser vazio.")
 	private String dataLancamento;
 	private String tipoLancamento;
 	private String descricao;
@@ -65,7 +65,8 @@ public class LancamentoDto {
 
 	@Override
 	public String toString() {
-		return "LancamentoDto [id=" + idLancamento + ", data=" + dataLancamento + ", tipoLancamento=" + tipoLancamento + ", descricao="
+		return "LancamentoDto [id=" + idLancamento + ", data=" + dataLancamento
+				+ ", tipoLancamento=" + tipoLancamento + ", descricao="
 				+ descricao + ", localizacao=" + localizacao + ", funcionarioId=" + funcionarioId + "]";
 	}
 

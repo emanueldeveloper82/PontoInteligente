@@ -1,8 +1,8 @@
 package br.com.eps.pontointeligente.api.entity;
 
+import br.com.eps.pontointeligente.api.enums.TipoLancamentoEnum;
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -19,39 +19,38 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import br.com.eps.pontointeligente.api.enums.TipoLancamentoEnum;
 
 @Entity
 @Table(name = "LANCAMENTO", schema = "PONTO_ELETRONICO")
-public class Lancamento implements Serializable{
-	
+public class Lancamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LANCAMENTO_ID_LANCAMENTO_SEQ")
-	@SequenceGenerator(name="LANCAMENTO_ID_LANCAMENTO_SEQ", sequenceName="LANCAMENTO_ID_LANCAMENTO_SEQ", schema="PONTO_ELETRONICO", allocationSize=1)  	
-	@Column(name="ID_LANCAMENTO")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LANCAMENTO_ID_LANCAMENTO_SEQ")
+	@SequenceGenerator(name = "LANCAMENTO_ID_LANCAMENTO_SEQ", sequenceName = "LANCAMENTO_ID_LANCAMENTO_SEQ",
+			schema = "PONTO_ELETRONICO", allocationSize = 1)
+	@Column(name = "ID_LANCAMENTO")
 	private Long idLancamento;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="DATA_LANCAMENTO", nullable = false)
+	@Column(name = "DATA_LANCAMENTO", nullable = false)
 	private Date dataLancamento;
 	
-	@Column(name="DESCRICAO", nullable = true)
+	@Column(name = "DESCRICAO", nullable = true)
 	private String descricao;
 	
-	@Column(name="LOCALIZACAO", nullable = true)
+	@Column(name = "LOCALIZACAO", nullable = true)
 	private String localizacao;
 	
-	@Column(name="DATA_CRIACAO", nullable = false)
+	@Column(name = "DATA_CRIACAO", nullable = false)
 	private Date dataCriacao;
 	
-	@Column(name="DATA_ATUALIZACAO", nullable = false)
+	@Column(name = "DATA_ATUALIZACAO", nullable = false)
 	private Date dataAtualizacao;
 	
 	@Enumerated(EnumType.STRING)
-	@Column(name="TIPO_LANCAMENTO", nullable = false)
+	@Column(name = "TIPO_LANCAMENTO", nullable = false)
 	private TipoLancamentoEnum tipoLancamentoEnum;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -156,7 +155,7 @@ public class Lancamento implements Serializable{
     
     @Override
 	public String toString() {
-		return "Lancamento ["+
+		return "Lancamento [" +
 			   " id=" + idLancamento + ", data=" + dataLancamento + ", descricao=" + descricao + 
 			   ", localizacao=" + localizacao + ", dataCriacao=" + dataCriacao + 
 			   ", dataAtualizacao=" + dataAtualizacao + ", tipo=" + tipoLancamentoEnum + 

@@ -20,7 +20,7 @@ import br.com.eps.pontointeligente.api.entity.Empresa;
 import br.com.eps.pontointeligente.api.repository.EmpresaRepository;
 
 @RunWith(SpringRunner.class)
-@ActiveProfiles("test")
+@ActiveProfiles("prod")
 @SpringBootTest
 public class EmpresaServiceTest {
 	

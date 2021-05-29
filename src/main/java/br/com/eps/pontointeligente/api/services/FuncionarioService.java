@@ -1,9 +1,8 @@
 package br.com.eps.pontointeligente.api.services;
 
+import br.com.eps.pontointeligente.api.entity.Funcionario;
 import java.util.List;
 import java.util.Optional;
-
-import br.com.eps.pontointeligente.api.entity.Funcionario;
 
 public interface FuncionarioService {
 	
@@ -44,7 +43,7 @@ public interface FuncionarioService {
 	
 	/**
 	 * Busca funcionario por empresa.
-	 * @param id
+	 * @param idEmpresa
 	 * @return List<Funcionario> 
 	 */
 	List<Funcionario> buscarPorIdEmpresa(Long idEmpresa);

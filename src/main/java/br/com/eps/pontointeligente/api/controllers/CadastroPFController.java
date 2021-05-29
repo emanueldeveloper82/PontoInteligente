@@ -1,11 +1,14 @@
 package br.com.eps.pontointeligente.api.controllers;
 
-import java.math.BigDecimal;
-import java.security.NoSuchAlgorithmException;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
+import br.com.eps.pontointeligente.api.dtos.CadastroPFDto;
+import br.com.eps.pontointeligente.api.entity.Empresa;
+import br.com.eps.pontointeligente.api.entity.Funcionario;
+import br.com.eps.pontointeligente.api.enums.PerfilEnum;
+import br.com.eps.pontointeligente.api.response.Response;
+import br.com.eps.pontointeligente.api.services.EmpresaService;
+import br.com.eps.pontointeligente.api.services.FuncionarioService;
+import br.com.eps.pontointeligente.api.utils.PasswordUtils;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.eps.pontointeligente.api.dtos.CadastroPFDto;
-import br.com.eps.pontointeligente.api.entity.Empresa;
-import br.com.eps.pontointeligente.api.entity.Funcionario;
-import br.com.eps.pontointeligente.api.enums.PerfilEnum;
-import br.com.eps.pontointeligente.api.response.Response;
-import br.com.eps.pontointeligente.api.services.EmpresaService;
-import br.com.eps.pontointeligente.api.services.FuncionarioService;
-import br.com.eps.pontointeligente.api.utils.PasswordUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
+import javax.validation.Valid;
 
 /**
  * Controller para cadastro de pessoa física.
@@ -97,15 +94,20 @@ public class CadastroPFController {
 		log.info("Validando dados existentes de PF: {}", cadastroPFDto.toString());
 		
 		Optional<Empresa> empresa = this.empresaService.buscarPorNumCnpj(cadastroPFDto.getCnpj());
-		if(!empresa.isPresent()) {
+		if (!empresa.isPresent()) {
 			result.addError(new ObjectError("empresa", "Empresa não cadastrada."));			
 		}
 		
 		this.funcionarioService.buscarFuncionarioPorNumCpf(cadastroPFDto.getCpf()).ifPresent(
-				func -> result.addError(new ObjectError("Funcionario", "Já existe um funcionário com este CPF.")) );
+				func -> result.addError(
+						new ObjectError("Funcionario",
+								"Já existe um funcionário com este CPF.")));
 		
-		this.funcionarioService.buscarFuncionarioPorEmail(cadastroPFDto.getEmail()).ifPresent(
-				func -> result.addError(new ObjectError("Funcionario", "Já existe um funcionário com este E-mail.")) );
+		this.funcionarioService.buscarFuncionarioPorEmail(cadastroPFDto.getEmail())
+				.ifPresent(
+				func -> result
+						.addError(new ObjectError("Funcionario",
+								"Já existe um funcionário com este E-mail.")));
 	}
 	
 	/**
@@ -153,10 +155,12 @@ public class CadastroPFController {
 		cadastroPFDto.setCnpj(funcionario.getEmpresa().getNumCnpj());
 		
 		funcionario.getQtdHorasAlmocoOpt()
-		.ifPresent(qtdHorasAlmoco -> cadastroPFDto.setQtdHorasAlmoco(Optional.of(Float.toString(qtdHorasAlmoco))));
+		.ifPresent(qtdHorasAlmoco -> cadastroPFDto
+				.setQtdHorasAlmoco(Optional.of(Float.toString(qtdHorasAlmoco))));
 		
 		funcionario.getQtdHorasTrabalhoDiaOpt()
-		.ifPresent(qtdHorasTrabDia -> cadastroPFDto.setQtdHorasTrabalhoDia(Optional.of(Float.toString(qtdHorasTrabDia))));
+		.ifPresent(qtdHorasTrabDia -> cadastroPFDto
+				.setQtdHorasTrabalhoDia(Optional.of(Float.toString(qtdHorasTrabDia))));
 		
 		funcionario.getValorHoraOpt()
 		.ifPresent(valorHora -> cadastroPFDto.setValorHora(Optional.of(valorHora.toString())));

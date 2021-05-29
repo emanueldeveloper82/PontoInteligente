@@ -1,13 +1,11 @@
 package br.com.eps.pontointeligente.api.security.jwt;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import br.com.eps.pontointeligente.api.entity.Funcionario;
 import br.com.eps.pontointeligente.api.enums.PerfilEnum;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JwtUserFactory {
 	

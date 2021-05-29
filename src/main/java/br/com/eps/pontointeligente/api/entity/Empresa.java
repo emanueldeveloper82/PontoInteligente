@@ -3,7 +3,6 @@ package br.com.eps.pontointeligente.api.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,21 +23,23 @@ public class Empresa implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EMPRESA_ID_EMPRESA_SEQ")
-	@SequenceGenerator(name="EMPRESA_ID_EMPRESA_SEQ", sequenceName="EMPRESA_ID_EMPRESA_SEQ", schema="PONTO_ELETRONICO", allocationSize=1)  	
-	@Column(name="ID_EMPRESA")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMPRESA_ID_EMPRESA_SEQ")
+	@SequenceGenerator(name = "EMPRESA_ID_EMPRESA_SEQ",
+			sequenceName = "EMPRESA_ID_EMPRESA_SEQ",
+			schema = "PONTO_ELETRONICO", allocationSize = 1)
+	@Column(name = "ID_EMPRESA")
 	private Long idEmpresa;
 	
-	@Column(name="NUM_CNPJ", nullable = false )
+	@Column(name = "NUM_CNPJ", nullable = false)
 	private String numCnpj;
 
-	@Column(name="DATA_CRIACAO", nullable = false )
+	@Column(name = "DATA_CRIACAO", nullable = false)
 	private Date dataCriacao;
 	
-	@Column(name="DATA_ATUALIZACAO", nullable = false )
+	@Column(name = "DATA_ATUALIZACAO", nullable = false)
 	private Date dataAtualizacao;
 	
-	@Column(name="RAZAO_SOCIAL", nullable = false )
+	@Column(name = "RAZAO_SOCIAL", nullable = false)
 	private String razaoSocial;
 
 	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

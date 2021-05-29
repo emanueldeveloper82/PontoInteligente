@@ -1,7 +1,8 @@
 package br.com.eps.pontointeligente.api.services.impl;
 
-import java.util.List;
-import java.util.Optional;
+import br.com.eps.pontointeligente.api.entity.Lancamento;
+import br.com.eps.pontointeligente.api.repository.LancamentoRepository;
+import br.com.eps.pontointeligente.api.services.LancamentoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import br.com.eps.pontointeligente.api.entity.Lancamento;
-import br.com.eps.pontointeligente.api.repository.LancamentoRepository;
-import br.com.eps.pontointeligente.api.services.LancamentoService;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LancamentoServiceImpl implements LancamentoService {
@@ -58,6 +57,7 @@ public class LancamentoServiceImpl implements LancamentoService {
 	public Optional<Lancamento> buscarUltimoPorFuncionarioId(Long funcionarioId) {
 		log.info("Buscando o último lançamento por ID de funcionário {}", funcionarioId);
 		return Optional.ofNullable(
-				this.lancamentoRepository.findFirstByFuncionarioIdFuncionarioOrderByDataCriacaoDesc(funcionarioId));
+				this.lancamentoRepository
+				.findFirstByFuncionarioIdFuncionarioOrderByDataCriacaoDesc(funcionarioId));
 	}
 }

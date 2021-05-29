@@ -14,7 +14,8 @@ public class BadRequestException extends RuntimeException {
 	private Object nomeDado;
 
 	public BadRequestException(String nomeOperacao, String motivoFalha, Object nomeDado) {
-		super(String.format("Não foi possível realizar a operação: %s." + "<br>" + "Motivo: %s.<br>" + "Registro: '%s'",
+		super(String.format("Não foi possível realizar a operação: %s." + "<br>"
+						+ "Motivo: %s.<br>" + "Registro: '%s'",
 				nomeOperacao, motivoFalha, nomeDado));
 		this.nomeOperacao = nomeOperacao;
 		this.motivoFalha = motivoFalha;

@@ -26,7 +26,7 @@ import br.com.eps.pontointeligente.api.services.EmpresaService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc //Deve ser adicionado o contexto web para rodar testes da camada web.
-@ActiveProfiles("test")
+@ActiveProfiles("prod")
 public class EmpresaControllerTest {
 	
 	

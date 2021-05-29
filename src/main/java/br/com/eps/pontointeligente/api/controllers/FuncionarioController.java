@@ -1,12 +1,12 @@
 package br.com.eps.pontointeligente.api.controllers;
 
-import java.math.BigDecimal;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.validation.Valid;
+import br.com.eps.pontointeligente.api.dtos.FuncionarioDto;
+import br.com.eps.pontointeligente.api.entity.Funcionario;
+import br.com.eps.pontointeligente.api.response.Response;
+import br.com.eps.pontointeligente.api.services.FuncionarioService;
+import br.com.eps.pontointeligente.api.utils.PasswordUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +20,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.eps.pontointeligente.api.dtos.FuncionarioDto;
-import br.com.eps.pontointeligente.api.entity.Funcionario;
-import br.com.eps.pontointeligente.api.response.Response;
-import br.com.eps.pontointeligente.api.services.FuncionarioService;
-import br.com.eps.pontointeligente.api.utils.PasswordUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
 
 /**
  * Controller de Funcionario.
@@ -58,7 +57,8 @@ public class FuncionarioController {
 	@ApiOperation(value = "Atualiza dados do funcionário.")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Response<FuncionarioDto>> atualizar(@PathVariable("id") Long id,
-			@Valid @RequestBody FuncionarioDto funcionarioDto, BindingResult result) throws NoSuchAlgorithmException {
+			@Valid @RequestBody FuncionarioDto funcionarioDto, BindingResult result)
+			throws NoSuchAlgorithmException {
 		log.info("Atualizando funcionário: {}", funcionarioDto.toString());
 		Response<FuncionarioDto> response = new Response<FuncionarioDto>();
 
@@ -109,26 +109,33 @@ public class FuncionarioController {
 	 * @param result
 	 * @throws NoSuchAlgorithmException
 	 */
-	private void atualizarDadosFuncionario(Funcionario funcionario, FuncionarioDto funcionarioDto, BindingResult result)
+	private void atualizarDadosFuncionario(Funcionario funcionario,
+										   FuncionarioDto funcionarioDto,
+										   BindingResult result)
 			throws NoSuchAlgorithmException {
+
 		funcionario.setNome(funcionarioDto.getNome());
 
 		if (!funcionario.getEmail().equals(funcionarioDto.getEmail())) {
 			this.funcionarioService.buscarFuncionarioPorEmail(funcionarioDto.getEmail())
-					.ifPresent(func -> result.addError(new ObjectError("email", "Email já existente.")));
+					.ifPresent(func -> result.addError(new ObjectError("email",
+							"Email já existente.")));
 			funcionario.setEmail(funcionarioDto.getEmail());
 		}
 
 		funcionario.setQtdHorasAlmoco(null);
 		funcionarioDto.getQtdHorasAlmoco()
-				.ifPresent(qtdHorasAlmoco -> funcionario.setQtdHorasAlmoco(Float.valueOf(qtdHorasAlmoco)));
+				.ifPresent(qtdHorasAlmoco -> funcionario
+						.setQtdHorasAlmoco(Float.valueOf(qtdHorasAlmoco)));
 
 		funcionario.setQtdHorasTrabalhoDia(null);
 		funcionarioDto.getQtdHorasTrabalhoDia()
-				.ifPresent(qtdHorasTrabDia -> funcionario.setQtdHorasTrabalhoDia(Float.valueOf(qtdHorasTrabDia)));
+				.ifPresent(qtdHorasTrabDia -> funcionario
+						.setQtdHorasTrabalhoDia(Float.valueOf(qtdHorasTrabDia)));
 
 		funcionario.setValorHora(null);
-		funcionarioDto.getValorHora().ifPresent(valorHora -> funcionario.setValorHora(new BigDecimal(valorHora)));
+		funcionarioDto.getValorHora().ifPresent(valorHora -> funcionario
+				.setValorHora(new BigDecimal(valorHora)));
 
 		if (funcionarioDto.getSenha().isPresent()) {
 			funcionario.setSenha(PasswordUtils.generateBCrypt(funcionarioDto.getSenha().get()));
@@ -147,11 +154,14 @@ public class FuncionarioController {
 		funcionarioDto.setEmail(funcionario.getEmail());
 		funcionarioDto.setNome(funcionario.getNome());
 		funcionario.getQtdHorasAlmocoOpt().ifPresent(
-				qtdHorasAlmoco -> funcionarioDto.setQtdHorasAlmoco(Optional.of(Float.toString(qtdHorasAlmoco))));
+				qtdHorasAlmoco -> funcionarioDto
+						.setQtdHorasAlmoco(Optional.of(Float.toString(qtdHorasAlmoco))));
 		funcionario.getQtdHorasTrabalhoDiaOpt().ifPresent(
-				qtdHorasTrabDia -> funcionarioDto.setQtdHorasTrabalhoDia(Optional.of(Float.toString(qtdHorasTrabDia))));
+				qtdHorasTrabDia -> funcionarioDto
+						.setQtdHorasTrabalhoDia(Optional.of(Float.toString(qtdHorasTrabDia))));
 		funcionario.getValorHoraOpt()
-				.ifPresent(valorHora -> funcionarioDto.setValorHora(Optional.of(valorHora.toString())));
+				.ifPresent(valorHora -> funcionarioDto
+						.setValorHora(Optional.of(valorHora.toString())));
 
 		return funcionarioDto;
 	}

@@ -1,12 +1,9 @@
 package br.com.eps.pontointeligente.api.repository;
 
-import java.util.List;
-
+import br.com.eps.pontointeligente.api.entity.Funcionario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
-
-import br.com.eps.pontointeligente.api.entity.Funcionario;
-
+import java.util.List;
 
 @Transactional(readOnly = true)
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {

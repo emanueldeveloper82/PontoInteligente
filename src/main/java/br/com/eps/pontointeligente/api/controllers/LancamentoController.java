@@ -1,13 +1,13 @@
 package br.com.eps.pontointeligente.api.controllers;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import javax.validation.Valid;
-
+import br.com.eps.pontointeligente.api.dtos.LancamentoDto;
+import br.com.eps.pontointeligente.api.entity.Funcionario;
+import br.com.eps.pontointeligente.api.entity.Lancamento;
+import br.com.eps.pontointeligente.api.enums.TipoLancamentoEnum;
+import br.com.eps.pontointeligente.api.exceptions.BadRequestException;
+import br.com.eps.pontointeligente.api.response.Response;
+import br.com.eps.pontointeligente.api.services.FuncionarioService;
+import br.com.eps.pontointeligente.api.services.LancamentoService;
 import org.apache.commons.lang3.EnumUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,15 +30,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.com.eps.pontointeligente.api.dtos.LancamentoDto;
-import br.com.eps.pontointeligente.api.entity.Funcionario;
-import br.com.eps.pontointeligente.api.entity.Lancamento;
-import br.com.eps.pontointeligente.api.enums.TipoLancamentoEnum;
-import br.com.eps.pontointeligente.api.exceptions.BadRequestException;
-import br.com.eps.pontointeligente.api.response.Response;
-import br.com.eps.pontointeligente.api.services.FuncionarioService;
-import br.com.eps.pontointeligente.api.services.LancamentoService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import javax.validation.Valid;
 /**
  * Controller de Lançamento.
  * @author emanuel developer
@@ -83,8 +80,10 @@ public class LancamentoController {
 		
 		Response<Page<LancamentoDto>> response = new Response<Page<LancamentoDto>>();
 		PageRequest pageRequest = PageRequest.of(pag, this.qtdPaginacao, Direction.valueOf(dir), ord);
-		Page<Lancamento> lancamentos = this.lancamentoService.buscarPorIdFuncionario(funcionarioId, pageRequest);
-		Page<LancamentoDto> lancamentosDto = lancamentos.map(lancamento -> this.converterLancamentoDto(lancamento));
+		Page<Lancamento> lancamentos = this.lancamentoService
+				.buscarPorIdFuncionario(funcionarioId, pageRequest);
+		Page<LancamentoDto> lancamentosDto = lancamentos
+				.map(lancamento -> this.converterLancamentoDto(lancamento));
 
 		response.setData(lancamentosDto);
 		return ResponseEntity.ok(response);
@@ -151,7 +150,7 @@ public class LancamentoController {
 		
 		Optional<Lancamento> lancamento = this.lancamentoService.buscarPorIdLancamento(id);
 		
-		if ( !lancamento.isPresent() ) {
+		if (!lancamento.isPresent()) {
 			log.info("Lançamento não encontrado para o ID: {}", id);
 			response.getErrors().add("Lançamento não encontrado para o id " + id);
 			return ResponseEntity.badRequest().body(response);
@@ -254,9 +253,11 @@ public class LancamentoController {
 		}
 
 		log.info("Validando funcionário id {}: ", lancamentoDto.getFuncionarioId());
-		Optional<Funcionario> funcionario = this.funcionarioService.buscarPorId(lancamentoDto.getFuncionarioId());
+		Optional<Funcionario> funcionario = this.funcionarioService
+				.buscarPorId(lancamentoDto.getFuncionarioId());
 		if (!funcionario.isPresent()) {
-			result.addError(new ObjectError("funcionario", "Funcionário não encontrado. ID inexistente."));
+			result.addError(new ObjectError("funcionario",
+					"Funcionário não encontrado. ID inexistente."));
 		}
 	}
 	
@@ -291,11 +292,13 @@ public class LancamentoController {
 	 * @return Lancamento
 	 * @throws ParseException 
 	 */
-	private Lancamento converterDtoParaLancamento(LancamentoDto lancamentoDto, BindingResult result) throws ParseException {
+	private Lancamento converterDtoParaLancamento(LancamentoDto lancamentoDto, BindingResult result)
+			throws ParseException {
 		Lancamento lancamento = new Lancamento();
 
 		if (lancamentoDto.getIdLancamento().isPresent()) {
-			Optional<Lancamento> lanc = this.lancamentoService.buscarPorIdLancamento(lancamentoDto.getIdLancamento().get());
+			Optional<Lancamento> lanc = this.lancamentoService
+					.buscarPorIdLancamento(lancamentoDto.getIdLancamento().get());
 			if (lanc.isPresent()) {
 				lancamento = lanc.get();
 			} else {

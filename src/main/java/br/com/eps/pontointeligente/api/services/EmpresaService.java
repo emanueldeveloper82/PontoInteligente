@@ -1,8 +1,7 @@
 package br.com.eps.pontointeligente.api.services;
 
-import java.util.Optional;
-
 import br.com.eps.pontointeligente.api.entity.Empresa;
+import java.util.Optional;
 
 public interface EmpresaService {
 	

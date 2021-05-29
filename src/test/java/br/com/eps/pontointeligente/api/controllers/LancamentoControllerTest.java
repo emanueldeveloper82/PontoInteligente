@@ -35,7 +35,7 @@ import br.com.eps.pontointeligente.api.services.LancamentoService;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
+@ActiveProfiles("prod")
 public class LancamentoControllerTest {
 
 	@Autowired

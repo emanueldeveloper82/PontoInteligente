@@ -1,10 +1,6 @@
 package br.com.eps.pontointeligente.api.security.jwt;
 
-import java.util.Optional;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
+import br.com.eps.pontointeligente.api.response.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.com.eps.pontointeligente.api.response.Response;
-import br.com.eps.pontointeligente.api.security.jwt.JwtAuthenticationDto;
-import br.com.eps.pontointeligente.api.security.jwt.JwtTokenDto;
-import br.com.eps.pontointeligente.api.security.jwt.JwtTokenUtil;
-
+import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/auth")
@@ -70,8 +63,8 @@ public class JwtAuthenticationController {
 		log.info("Gerando token para o email {}.", authenticationDto.getEmail());
 		
 		Authentication authentication = authenticationManager
-				.authenticate(new UsernamePasswordAuthenticationToken( 
-						authenticationDto.getEmail(), authenticationDto.getSenha()) );
+				.authenticate(new UsernamePasswordAuthenticationToken(
+						authenticationDto.getEmail(), authenticationDto.getSenha()));
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 

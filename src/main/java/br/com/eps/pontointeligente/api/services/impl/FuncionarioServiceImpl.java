@@ -1,16 +1,14 @@
 package br.com.eps.pontointeligente.api.services.impl;
 
-import java.util.List;
-import java.util.Optional;
-
+import br.com.eps.pontointeligente.api.entity.Funcionario;
+import br.com.eps.pontointeligente.api.repository.FuncionarioRepository;
+import br.com.eps.pontointeligente.api.services.FuncionarioService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import br.com.eps.pontointeligente.api.entity.Funcionario;
-import br.com.eps.pontointeligente.api.repository.FuncionarioRepository;
-import br.com.eps.pontointeligente.api.services.FuncionarioService;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FuncionarioServiceImpl implements FuncionarioService {
@@ -43,7 +41,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	@Override
 	public Optional<Funcionario> buscarPorId(Long idFuncionario) {
 		log.info("Buscando um Funcionário pelo id {}", idFuncionario);
-		return Optional.ofNullable(this.funcionarioRepository.getOne(idFuncionario) );
+		return Optional.ofNullable(this.funcionarioRepository.getOne(idFuncionario));
 	}
 
 	@Override

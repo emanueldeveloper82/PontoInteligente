@@ -1,11 +1,9 @@
 package br.com.eps.pontointeligente.api.dtos;
 
+import org.hibernate.validator.constraints.Length;
 import java.util.Optional;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Length;
 
 public class FuncionarioDto {
 	
@@ -39,7 +37,7 @@ public class FuncionarioDto {
 	
 	@NotEmpty(message = "Email não pode ser vazio.")
 	@Length(min = 5, max = 200, message = "Email deve conter entre 5 e 200 caracteres.")
-	@Email(message="Email inválido.")
+	@Email(message = "Email inválido.")
 	public String getEmail() {
 		return email;
 	}
@@ -82,8 +80,10 @@ public class FuncionarioDto {
 
 	@Override
 	public String toString() {
-		return "FuncionarioDto [id=" + id + ", nome=" + nome + ", email=" + email + ", senha=" + senha + ", valorHora="
-				+ valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia + ", qtdHorasAlmoco=" + qtdHorasAlmoco
+		return "FuncionarioDto [id=" + id + ", nome=" + nome
+				+ ", email=" + email + ", senha=" + senha + ", valorHora="
+				+ valorHora + ", qtdHorasTrabalhoDia="
+				+ qtdHorasTrabalhoDia + ", qtdHorasAlmoco=" + qtdHorasAlmoco
 				+ "]";
 	}
 

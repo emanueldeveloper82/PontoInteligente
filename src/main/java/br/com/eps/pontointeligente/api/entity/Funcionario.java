@@ -1,11 +1,11 @@
 package br.com.eps.pontointeligente.api.entity;
 
+import br.com.eps.pontointeligente.api.enums.PerfilEnum;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +23,6 @@ import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import br.com.eps.pontointeligente.api.enums.PerfilEnum;
 
 @Entity
 @Table(name = "FUNCIONARIO", schema = "PONTO_ELETRONICO")
@@ -32,24 +31,25 @@ public class Funcionario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="FUNCIONARIO_ID_FUNCIONARIO_SEQ")
-	@SequenceGenerator(name="FUNCIONARIO_ID_FUNCIONARIO_SEQ", sequenceName="FUNCIONARIO_ID_FUNCIONARIO_SEQ", schema="PONTO_ELETRONICO", allocationSize=1)  	
-	@Column(name="ID_FUNCIONARIO")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FUNCIONARIO_ID_FUNCIONARIO_SEQ")
+	@SequenceGenerator(name = "FUNCIONARIO_ID_FUNCIONARIO_SEQ", sequenceName = "FUNCIONARIO_ID_FUNCIONARIO_SEQ",
+			schema = "PONTO_ELETRONICO", allocationSize = 1)
+	@Column(name = "ID_FUNCIONARIO")
 	private Long idFuncionario;
 	
-	@Column(name="NOME", nullable = false)
+	@Column(name = "NOME", nullable = false)
 	private String nome;
 	
-	@Column(name="EMAIL", nullable = false)
+	@Column(name = "EMAIL", nullable = false)
 	private String email;
 	
-	@Column(name="SENHA", nullable = false)
+	@Column(name = "SENHA", nullable = false)
 	private String senha;
 	
-	@Column(name="NUM_CPF", nullable = false)
+	@Column(name = "NUM_CPF", nullable = false)
 	private String numCpf;
 	
-	@Column(name="VALOR_HORA", nullable = true)
+	@Column(name = "VALOR_HORA", nullable = true)
 	private BigDecimal valorHora;
 	
 	@Column(name = "QTD_HORAS_TRABALHO_DIA", nullable = true)
@@ -58,14 +58,14 @@ public class Funcionario implements Serializable {
 	@Column(name = "QTD_HORAS_ALMOCO", nullable = true)
 	private Float qtdHorasAlmoco;
 	
-	@Enumerated( EnumType.STRING)
-	@Column(name="PERFIL", nullable = false)
+	@Enumerated(EnumType.STRING)
+	@Column(name = "PERFIL", nullable = false)
 	private PerfilEnum perfil;
 	
-	@Column(name="DATA_CRIACAO", nullable = false)
+	@Column(name = "DATA_CRIACAO", nullable = false)
 	private Date dataCriacao;
 	
-	@Column(name="DATA_ATUALIZACAO", nullable = false)
+	@Column(name = "DATA_ATUALIZACAO", nullable = false)
 	private Date dataAtualizacao;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -212,13 +212,13 @@ public class Funcionario implements Serializable {
     
     @Override
 	public String toString() {
-		return "Funcionario ["+
+		return "Funcionario [" +
 			   " id=" + idFuncionario + 
 			   ", nome=" + nome + ", email=" + email + 
 			   ", senha=" + senha + ", cpf=" + numCpf + 
 			   ", valorHora=" + valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia + 
-			   ", qtdHorasAlmoco="+ qtdHorasAlmoco + ", perfil=" + perfil + 
-			   ", dataCriacao="+ dataCriacao + ", dataAtualizacao=" + dataAtualizacao + 
+			   ", qtdHorasAlmoco=" + qtdHorasAlmoco + ", perfil=" + perfil +
+			   ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao +
 			   ", empresa=" + empresa + "]";
 	}
 
