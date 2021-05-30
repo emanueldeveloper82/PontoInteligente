@@ -3,12 +3,13 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 //	id "org.flywaydb.flyway" version "6.0.8"
 	id 'java'
-	id 'checkstyle'
+//	id 'checkstyle'
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'application'
+//apply plugin: 'checkstyle'
 mainClassName = 'br.com.eps.pontointeligente.api.PontoInteligenteApplication'
 
 group = 'br.com.eps'
@@ -53,4 +54,8 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+//checkstyle {
+//	configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+//}
 

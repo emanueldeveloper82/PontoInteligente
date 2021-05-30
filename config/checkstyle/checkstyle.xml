@@ -371,5 +371,10 @@ page at http://checkstyle.sourceforge.net/config.html -->
         <property name="file" value="suppressions.xml"/>
     </module-->
 
+    <!-- Suppression file -->
+    <module name="SuppressionFilter">
+        <property name="file" value="${config_loc}/suppressions.xml"/>
+    </module>
+
 
 </module>
