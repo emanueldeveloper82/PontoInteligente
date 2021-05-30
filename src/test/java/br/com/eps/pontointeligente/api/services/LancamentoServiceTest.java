@@ -1,7 +1,6 @@
 package br.com.eps.pontointeligente.api.services;
 
 import static org.junit.Assert.assertNotNull;
-
 import java.util.ArrayList;
 import java.util.Optional;
 import org.junit.Before;
@@ -18,7 +17,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import br.com.eps.pontointeligente.api.entity.Lancamento;
 import br.com.eps.pontointeligente.api.repository.LancamentoRepository;
 

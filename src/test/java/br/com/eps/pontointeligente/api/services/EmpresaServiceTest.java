@@ -25,30 +25,36 @@ import br.com.eps.pontointeligente.api.repository.EmpresaRepository;
 public class EmpresaServiceTest {
 	
 	@MockBean
-	private EmpresaRepository empresaRepository;
+	public EmpresaRepository repository;
 	
 	@Autowired
-	private EmpresaService empresaService;
+	public EmpresaService service;
 		
 	private static final String CNPJ = "12345678910";
 	
 	
 	@Before
 	public void setUp() {
-		BDDMockito.given(this.empresaRepository.findByNumCnpj(Mockito.anyString())).willReturn(new Empresa());
-		BDDMockito.given(this.empresaRepository.save(Mockito.any(Empresa.class))).willReturn(new Empresa());	
+		BDDMockito.given(this.repository.findByNumCnpj(Mockito.anyString())).willReturn(new Empresa());
+		BDDMockito.given(this.repository.save(Mockito.any(Empresa.class))).willReturn(new Empresa());
 	}
 	
 	@Test
 	public void testBuscarPorNumCnpj() {
-		Optional<Empresa> empresa = this.empresaService.buscarPorNumCnpj(CNPJ);
-		assertTrue(empresa.isPresent());		
+		Empresa empresa= new Empresa();
+		empresa.setIdEmpresa(1L);
+		empresa.setNumCnpj(CNPJ);
+		Mockito.when(repository.findByNumCnpj(empresa.getNumCnpj()))
+				.thenReturn(empresa);
+		assertNotNull(service.buscarPorNumCnpj(empresa.getNumCnpj()));
 	}
 	
 	@Test
 	public void testSalvarEmpresa() {
-		Empresa empresa = this.empresaService.persistir(new Empresa());				
-		assertNotNull(empresa);		
+		Empresa empresa = new Empresa();
+		empresa.setIdEmpresa(1L);
+		empresa.setNumCnpj(CNPJ);
+		assertNotNull(service.persistir(empresa));
 	}
 	
 	
