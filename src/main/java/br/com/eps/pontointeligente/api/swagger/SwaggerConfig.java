@@ -19,7 +19,7 @@ import springfox.documentation.swagger.web.SecurityConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
-@Profile("dev")
+@Profile("prod")
 @EnableSwagger2
 public class SwaggerConfig {
 
@@ -41,7 +41,7 @@ public class SwaggerConfig {
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder().title("Ponto Eletrônico API") 
 				.description("Documentação da API de acesso aos endpoints do Ponto Eletrônico.")
-				.version("1.0")
+				.version("0.0.2-SNAPSHOT")
 				.license("Apache License Version 2.0")
 				.licenseUrl("https://www.apache.org/licenses/LICENSE-2.0\"")
 				.contact(new Contact("Emanuel Developer",
