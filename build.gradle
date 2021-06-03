@@ -13,7 +13,7 @@ apply plugin: 'application'
 mainClassName = 'br.com.eps.pontointeligente.api.PontoInteligenteApplication'
 
 group = 'br.com.eps'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 configurations {
