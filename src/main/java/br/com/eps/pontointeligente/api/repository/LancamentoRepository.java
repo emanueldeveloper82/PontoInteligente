@@ -12,18 +12,18 @@ import javax.persistence.NamedQuery;
 
 @Transactional(readOnly = true)
 @NamedQueries(value = {
-	@NamedQuery(name = "LancamentoRepository.findByFuncionarioIdFuncionario", 
+	@NamedQuery(name = "LancamentoRepository.findByFuncionario",
 			   query = "SELECT l FROM Lancamento l WHERE l.funcionario.idfuncionario =:idfuncionario")
 })
 public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
 	
-	public List<Lancamento> findByFuncionarioIdFuncionario(@Param("idfuncionario") Long idfuncionario);
+	public List<Lancamento> findByFuncionario(@Param("idfuncionario") Long idfuncionario);
 	
-	public Page<Lancamento> findByFuncionarioIdFuncionario(@Param("idfuncionario")
+	public Page<Lancamento> findByFuncionario(@Param("idfuncionario")
 										 Long idfuncionario, Pageable pageable);
 	
-	Lancamento findFirstByFuncionarioIdFuncionarioOrderByDataCriacaoDesc(Long funcionarioId);
+	Lancamento findFirstByFuncionarioOrderByDataCriacaoDesc(Long funcionarioId);
 
-	List<Lancamento> findByFuncionarioIdFuncionarioOrderByDataLancamentoDesc(Long funcionarioId);
+	List<Lancamento> findByFuncionarioOrderByDataLancamentoDesc(Long funcionarioId);
 
 }

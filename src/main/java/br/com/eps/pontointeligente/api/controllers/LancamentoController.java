@@ -81,7 +81,7 @@ public class LancamentoController {
 		Response<Page<LancamentoDto>> response = new Response<Page<LancamentoDto>>();
 		PageRequest pageRequest = PageRequest.of(pag, this.qtdPaginacao, Direction.valueOf(dir), ord);
 		Page<Lancamento> lancamentos = this.lancamentoService
-				.buscarPorIdFuncionario(funcionarioId, pageRequest);
+				.buscarLancamentoPorIdFuncionario(funcionarioId, pageRequest);
 		Page<LancamentoDto> lancamentosDto = lancamentos
 				.map(lancamento -> this.converterLancamentoDto(lancamento));
 
@@ -148,7 +148,7 @@ public class LancamentoController {
 		
 		Response<LancamentoDto> response = new Response<LancamentoDto>();
 		
-		Optional<Lancamento> lancamento = this.lancamentoService.buscarPorIdLancamento(id);
+		Optional<Lancamento> lancamento = this.lancamentoService.buscarLancamentoPorIdLancamento(id);
 		
 		if (!lancamento.isPresent()) {
 			log.info("Lançamento não encontrado para o ID: {}", id);
@@ -227,7 +227,7 @@ public class LancamentoController {
 	public ResponseEntity<Response<String>> remover(@PathVariable("id") Long id) {
 		log.info("Removendo lançamento: {}", id);
 		Response<String> response = new Response<String>();
-		Optional<Lancamento> lancamento = this.lancamentoService.buscarPorIdLancamento(id);
+		Optional<Lancamento> lancamento = this.lancamentoService.buscarLancamentoPorIdLancamento(id);
 
 		if (!lancamento.isPresent()) {
 			log.info("Erro ao remover devido ao lançamento ID: {} ser inválido.", id);
@@ -276,7 +276,7 @@ public class LancamentoController {
 			lancamentoDto.setDescricao(lancamento.getDescricao());
 			lancamentoDto.setLocalizacao(lancamento.getLocalizacao());
 			lancamentoDto.setDataLancamento(this.dateFormat.format(lancamento.getDataLancamento()));
-			lancamentoDto.setFuncionarioId(lancamento.getFuncionario().getIdFuncionario());
+			lancamentoDto.setFuncionarioId(lancamento.getFuncionario().getId());
 		} catch (Exception e) {
 			throw new BadRequestException("Erro interno ao tentar converter para um Dto ");			
 		}		
@@ -298,7 +298,7 @@ public class LancamentoController {
 
 		if (lancamentoDto.getIdLancamento().isPresent()) {
 			Optional<Lancamento> lanc = this.lancamentoService
-					.buscarPorIdLancamento(lancamentoDto.getIdLancamento().get());
+					.buscarLancamentoPorIdLancamento(lancamentoDto.getIdLancamento().get());
 			if (lanc.isPresent()) {
 				lancamento = lanc.get();
 			} else {
@@ -306,7 +306,7 @@ public class LancamentoController {
 			}
 		} else {
 			lancamento.setFuncionario(new Funcionario());
-			lancamento.getFuncionario().setIdFuncionario(lancamentoDto.getFuncionarioId());
+			lancamento.getFuncionario().setId(lancamentoDto.getFuncionarioId());
 		}
 
 		lancamento.setDescricao(lancamentoDto.getDescricao());

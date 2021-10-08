@@ -32,7 +32,7 @@ public class FuncionarioServiceTest {
 	@Before
 	public void setUp() {
 		BDDMockito.given(this.repository.save(Mockito.any(Funcionario.class))).willReturn(new Funcionario());
-		BDDMockito.given(this.repository.findByNumCpf(Mockito.anyString())).willReturn(new Funcionario());
+		BDDMockito.given(this.repository.findByCpf(Mockito.anyString())).willReturn(new Funcionario());
 		BDDMockito.given(this.repository.findByEmail(Mockito.anyString())).willReturn(new Funcionario());
 		BDDMockito.given(this.repository.getOne(Mockito.anyLong())).willReturn(new Funcionario());
 	}
@@ -41,27 +41,27 @@ public class FuncionarioServiceTest {
 	@Test
 	public void testarPersistir() {
 		Funcionario funcionario = new Funcionario();
-		funcionario.setIdFuncionario(1L);
-		funcionario.setNumCpf(CPF);
+		funcionario.setId(1L);
+		funcionario.setCpf(CPF);
 		assertNotNull(service.persistirFuncionario(funcionario));
 	}
 	
 	@Test
 	public void testarBuscarPorNumCPF() {
 		Funcionario funcionario = new Funcionario();
-		funcionario.setIdFuncionario(1L);
-		funcionario.setNumCpf(CPF);
+		funcionario.setId(1L);
+		funcionario.setCpf(CPF);
 		funcionario.setEmail(EMAIL);
-		Mockito.when(repository.findByNumCpf(funcionario.getNumCpf()))
+		Mockito.when(repository.findByCpf(funcionario.getCpf()))
 				.thenReturn(funcionario);
-		assertNotNull(service.buscarFuncionarioPorEmail(funcionario.getNumCpf()));
+		assertNotNull(service.buscarFuncionarioPorEmail(funcionario.getCpf()));
 	}
 	
 	@Test
 	public void testarBuscarPorEmail() {
 		Funcionario funcionario = new Funcionario();
-		funcionario.setIdFuncionario(1L);
-		funcionario.setNumCpf(CPF);
+		funcionario.setId(1L);
+		funcionario.setCpf(CPF);
 		funcionario.setEmail(EMAIL);
 		Mockito.when(repository.findByEmail(funcionario.getEmail()))
 				.thenReturn(funcionario);
@@ -72,12 +72,12 @@ public class FuncionarioServiceTest {
 	public void testarBuscarPorId() {
 
 		Funcionario funcionario = new Funcionario();
-		funcionario.setIdFuncionario(1L);
-		funcionario.setNumCpf(CPF);
+		funcionario.setId(1L);
+		funcionario.setCpf(CPF);
 		funcionario.setEmail(EMAIL);
-		Mockito.when(repository.findById(funcionario.getIdFuncionario()))
+		Mockito.when(repository.findById(funcionario.getId()))
 				.thenReturn(Optional.of(funcionario));
-		assertNotNull(service.buscarPorId(funcionario.getIdFuncionario()));
+		assertNotNull(service.buscarPorId(funcionario.getId()));
 	}
 
 }

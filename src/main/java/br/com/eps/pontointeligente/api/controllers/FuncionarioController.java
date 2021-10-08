@@ -150,7 +150,7 @@ public class FuncionarioController {
 	 */
 	private FuncionarioDto converterFuncionarioDto(Funcionario funcionario) {
 		FuncionarioDto funcionarioDto = new FuncionarioDto();
-		funcionarioDto.setId(funcionario.getIdFuncionario());
+		funcionarioDto.setId(funcionario.getId());
 		funcionarioDto.setEmail(funcionario.getEmail());
 		funcionarioDto.setNome(funcionario.getNome());
 		funcionario.getQtdHorasAlmocoOpt().ifPresent(

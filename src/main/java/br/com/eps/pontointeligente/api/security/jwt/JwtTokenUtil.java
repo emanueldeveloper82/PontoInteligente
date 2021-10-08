@@ -107,8 +107,8 @@ public class JwtTokenUtil {
 		userDetails.getAuthorities().forEach(authority -> claims.put(CLAIM_KEY_ROLE, authority.getAuthority()));
 		claims.put(CLAIM_KEY_CREATED, new Date());
 		if (funcionario != null) {
-			claims.put("idFuncionario", funcionario.getIdFuncionario());
-			claims.put("idEmpresa", funcionario.getEmpresa().getIdEmpresa());
+			claims.put("idFuncionario", funcionario.getId());
+			claims.put("idEmpresa", funcionario.getEmpresa().getId());
 		}
 
 		return gerarToken(claims);

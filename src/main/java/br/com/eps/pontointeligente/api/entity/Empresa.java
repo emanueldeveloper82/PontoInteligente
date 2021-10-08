@@ -28,10 +28,10 @@ public class Empresa implements Serializable {
 			sequenceName = "EMPRESA_ID_EMPRESA_SEQ",
 			schema = "PONTO_ELETRONICO", allocationSize = 1)
 	@Column(name = "ID_EMPRESA")
-	private Long idEmpresa;
+	private Long id;
 	
 	@Column(name = "NUM_CNPJ", nullable = false)
-	private String numCnpj;
+	private String cnpj;
 
 	@Column(name = "DATA_CRIACAO", nullable = false)
 	private Date dataCriacao;
@@ -46,20 +46,20 @@ public class Empresa implements Serializable {
 	private List<Funcionario> funcionarios;
 	
 	
-	public Long getIdEmpresa() {
-		return idEmpresa;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdEmpresa(Long idEmpresa) {
-		this.idEmpresa = idEmpresa;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getNumCnpj() {
-		return numCnpj;
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setNumCnpj(String numCnpj) {
-		this.numCnpj = numCnpj;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
 	public Date getDataCriacao() {
@@ -109,9 +109,9 @@ public class Empresa implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Empresa [id=" + idEmpresa + 
+		return "Empresa [id=" + id +
 			   ", razaoSocial=" + razaoSocial + 
-			   ", cnpj=" + numCnpj + 
+			   ", cnpj=" + cnpj +
 			   ", dataCriacao=" + dataCriacao +
 			   ", dataAtualizacao=" + dataAtualizacao + "]";
 	}

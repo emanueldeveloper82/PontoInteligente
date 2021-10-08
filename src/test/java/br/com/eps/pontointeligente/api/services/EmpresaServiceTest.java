@@ -3,8 +3,6 @@ package br.com.eps.pontointeligente.api.services;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Optional;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,25 +33,25 @@ public class EmpresaServiceTest {
 	
 	@Before
 	public void setUp() {
-		BDDMockito.given(this.repository.findByNumCnpj(Mockito.anyString())).willReturn(new Empresa());
+		BDDMockito.given(this.repository.findByCnpj(Mockito.anyString())).willReturn(new Empresa());
 		BDDMockito.given(this.repository.save(Mockito.any(Empresa.class))).willReturn(new Empresa());
 	}
 	
 	@Test
 	public void testBuscarPorNumCnpj() {
 		Empresa empresa= new Empresa();
-		empresa.setIdEmpresa(1L);
-		empresa.setNumCnpj(CNPJ);
-		Mockito.when(repository.findByNumCnpj(empresa.getNumCnpj()))
+		empresa.setId(1L);
+		empresa.setCnpj(CNPJ);
+		Mockito.when(repository.findByCnpj(empresa.getCnpj()))
 				.thenReturn(empresa);
-		assertNotNull(service.buscarPorNumCnpj(empresa.getNumCnpj()));
+		assertNotNull(service.buscarPorCnpj(empresa.getCnpj()));
 	}
 	
 	@Test
 	public void testSalvarEmpresa() {
 		Empresa empresa = new Empresa();
-		empresa.setIdEmpresa(1L);
-		empresa.setNumCnpj(CNPJ);
+		empresa.setId(1L);
+		empresa.setCnpj(CNPJ);
 		assertNotNull(service.persistir(empresa));
 	}
 	

@@ -9,6 +9,7 @@ import br.com.eps.pontointeligente.api.services.EmpresaService;
 import br.com.eps.pontointeligente.api.services.FuncionarioService;
 import br.com.eps.pontointeligente.api.utils.PasswordUtils;
 import io.swagger.annotations.Api;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class CadastroPJController {
 	
 	@Autowired
 	private EmpresaService empresaService;
+
+	@Autowired
+	private ModelMapper modelMapper;
 	
 	/**
 	 * Cadastra uma Pessoa Juridica na base de dados.
@@ -59,10 +63,14 @@ public class CadastroPJController {
 		Response<CadastroPJDto> response = new Response<>();
 		
 		this.validarDadosExistentes(cadastroPJDto, result);
-		
-		Empresa empresa = this.converterDtoParaEmpresa(cadastroPJDto);
-		Funcionario funcionario = this.converteDtoParaFuncionario(cadastroPJDto);
-		
+
+		Empresa empresa = modelMapper.map(cadastroPJDto, Empresa.class);
+
+		//Todo: Ajustar isso para um generic;
+		Funcionario funcionario = modelMapper.map(cadastroPJDto, Funcionario.class);
+		funcionario.setPerfil(PerfilEnum.ROLE_ADMIN);
+		funcionario.setSenha(PasswordUtils.generateBCrypt(cadastroPJDto.getSenha()));
+
 		/**verifica se existe erros de validação.*/
 		if (result.hasErrors()) {
 			log.error("Erro ao validar cadastro de PJ: {}", result.getAllErrors());
@@ -74,7 +82,9 @@ public class CadastroPJController {
 		funcionario.setEmpresa(empresa);
 		this.funcionarioService.persistirFuncionario(funcionario);
 		
-		response.setData(this.converteFuncionarioParaDTO(funcionario));
+//		response.setData(this.converteFuncionarioParaDTO(funcionario));
+
+		response.setData(modelMapper.map(funcionario, CadastroPJDto.class));
 		
 		return ResponseEntity.ok(response);
 	}
@@ -89,12 +99,12 @@ public class CadastroPJController {
 		
 		log.info("Validando dados existentes de PJ: {}", cadastroPJDto.toString());
 		
-		this.empresaService.buscarPorNumCnpj(cadastroPJDto.getCnpj())
+		this.empresaService.buscarPorCnpj(cadastroPJDto.getCnpj())
 				.ifPresent(emp -> result
 						.addError(new ObjectError("empresa",
 								"Já existe uma empresa com este CNPJ.")));
 		
-		this.funcionarioService.buscarFuncionarioPorNumCpf(cadastroPJDto.getCpf())
+		this.funcionarioService.buscarFuncionarioPorCpf(cadastroPJDto.getCpf())
 				.ifPresent(func -> result
 						.addError(new ObjectError("Funcionario",
 								"Já existe um funcionário com este CPF.")));
@@ -116,7 +126,7 @@ public class CadastroPJController {
 		log.info("Convertenndo dados do DTo para a Empresa CNPJ: {}", cadastroPJDto.getCnpj());
 		
 		Empresa empresa = new Empresa();
-		empresa.setNumCnpj(cadastroPJDto.getCnpj());
+		empresa.setCnpj(cadastroPJDto.getCnpj());
 		empresa.setRazaoSocial(cadastroPJDto.getRazaoSocial());
 		
 		return empresa;
@@ -135,7 +145,7 @@ public class CadastroPJController {
 		Funcionario funcionario = new Funcionario();
 		funcionario.setNome(cadastroPJDto.getNome());
 		funcionario.setEmail(cadastroPJDto.getEmail());
-		funcionario.setNumCpf(cadastroPJDto.getCpf());
+		funcionario.setCpf(cadastroPJDto.getCpf());
 		funcionario.setPerfil(PerfilEnum.ROLE_ADMIN);
 		funcionario.setSenha(PasswordUtils.generateBCrypt(cadastroPJDto.getSenha()));
 		
@@ -145,21 +155,21 @@ public class CadastroPJController {
 	/**
 	 * Converte dados do DTO para Funcionário.
 	 * 
-	 * @param cadastroPJDto
+	 * @param funcionario
 	 * @return CadastroPJDto
 	 */
 	private CadastroPJDto converteFuncionarioParaDTO(Funcionario funcionario) {
 		
-		log.info("Convertenndo dados do Funcionario para o DTo CPF: {}", funcionario.getNumCpf());
+		log.info("Convertenndo dados do Funcionario para o DTo CPF: {}", funcionario.getCpf());
 		
 		CadastroPJDto cadastroPJDto = new CadastroPJDto();
 		
-		cadastroPJDto.setId(funcionario.getIdFuncionario());
-		cadastroPJDto.setCpf(funcionario.getNumCpf());
+		cadastroPJDto.setId(funcionario.getId());
+		cadastroPJDto.setCpf(funcionario.getCpf());
 		cadastroPJDto.setNome(funcionario.getNome());
 		cadastroPJDto.setEmail(funcionario.getEmail());
 		cadastroPJDto.setRazaoSocial(funcionario.getEmpresa().getRazaoSocial());
-		cadastroPJDto.setCnpj(funcionario.getEmpresa().getNumCnpj());
+		cadastroPJDto.setCnpj(funcionario.getEmpresa().getCnpj());
 		
 		return cadastroPJDto;
 	}

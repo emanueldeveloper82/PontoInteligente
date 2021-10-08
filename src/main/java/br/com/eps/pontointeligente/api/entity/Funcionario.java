@@ -35,7 +35,7 @@ public class Funcionario implements Serializable {
 	@SequenceGenerator(name = "FUNCIONARIO_ID_FUNCIONARIO_SEQ", sequenceName = "FUNCIONARIO_ID_FUNCIONARIO_SEQ",
 			schema = "PONTO_ELETRONICO", allocationSize = 1)
 	@Column(name = "ID_FUNCIONARIO")
-	private Long idFuncionario;
+	private Long id;
 	
 	@Column(name = "NOME", nullable = false)
 	private String nome;
@@ -47,7 +47,7 @@ public class Funcionario implements Serializable {
 	private String senha;
 	
 	@Column(name = "NUM_CPF", nullable = false)
-	private String numCpf;
+	private String cpf;
 	
 	@Column(name = "VALOR_HORA", nullable = true)
 	private BigDecimal valorHora;
@@ -78,12 +78,12 @@ public class Funcionario implements Serializable {
 	
 	public Funcionario() {}
 
-	public Long getIdFuncionario() {
-		return idFuncionario;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdFuncionario(Long idFuncionario) {
-		this.idFuncionario = idFuncionario;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -110,12 +110,12 @@ public class Funcionario implements Serializable {
 		this.senha = senha;
 	}
 
-	public String getNumCpf() {
-		return numCpf;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setNumCpf(String numCpf) {
-		this.numCpf = numCpf;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public BigDecimal getValorHora() {
@@ -213,9 +213,9 @@ public class Funcionario implements Serializable {
     @Override
 	public String toString() {
 		return "Funcionario [" +
-			   " id=" + idFuncionario + 
+			   " id=" + id +
 			   ", nome=" + nome + ", email=" + email + 
-			   ", senha=" + senha + ", cpf=" + numCpf + 
+			   ", senha=" + senha + ", cpf=" + cpf +
 			   ", valorHora=" + valorHora + ", qtdHorasTrabalhoDia=" + qtdHorasTrabalhoDia + 
 			   ", qtdHorasAlmoco=" + qtdHorasAlmoco + ", perfil=" + perfil +
 			   ", dataCriacao=" + dataCriacao + ", dataAtualizacao=" + dataAtualizacao +

@@ -36,7 +36,7 @@ public class LancamentoServiceTest {
 	public void setUp() {
 		
 		BDDMockito.given(this.lancamentoRepository
-				.findByFuncionarioIdFuncionario(Mockito.anyLong(), Mockito.any(PageRequest.class)))
+				.findByFuncionario(Mockito.anyLong(), Mockito.any(PageRequest.class)))
 		.willReturn(new PageImpl<Lancamento>(new ArrayList<Lancamento>()));
 		
 		BDDMockito.given(this.lancamentoRepository.getOne(Mockito.anyLong())).willReturn(new Lancamento());
@@ -50,7 +50,7 @@ public class LancamentoServiceTest {
 	@Test
 	public void testBuscarLancamentosPorFuncionario() {
 		Sort sort = Sort.by("FuncionarioIdFuncionario"); 
-		Page<Lancamento> lancamento = this.lancamentoService.buscarPorIdFuncionario(1L, PageRequest.of(0, 10, sort));
+		Page<Lancamento> lancamento = this.lancamentoService.buscarLancamentoPorIdFuncionario(1L, PageRequest.of(0, 10, sort));
 		assertNotNull(lancamento);
 	}
 	
@@ -62,7 +62,7 @@ public class LancamentoServiceTest {
 	
 	@Test
 	public void testarBuscarPorIdLancamento() {
-		Optional<Lancamento> lancamento = this.lancamentoService.buscarPorIdLancamento(1L);
+		Optional<Lancamento> lancamento = this.lancamentoService.buscarLancamentoPorIdLancamento(1L);
 		assertNotNull(lancamento);
 	}
 }

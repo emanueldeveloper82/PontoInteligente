@@ -48,7 +48,7 @@ public class EmpresaController {
 		log.info("Buscando empresa pelo CNPJ: {}", cnpj);
 		
 		Response<EmpresaDto> response = new Response<>();
-		Optional<Empresa> empresa = this.empresaService.buscarPorNumCnpj(cnpj);
+		Optional<Empresa> empresa = this.empresaService.buscarPorCnpj(cnpj);
 
 		if (!empresa.isPresent()) {
 			log.info("Empresa não localizada pelo CNPJ: {}", cnpj);
@@ -67,8 +67,8 @@ public class EmpresaController {
 	 */
 	private EmpresaDto converterEmpresaParaDto(Empresa empresa) {
 		EmpresaDto empresaDto = new EmpresaDto();
-		empresaDto.setId(empresa.getIdEmpresa());
-		empresaDto.setCnpj(empresa.getNumCnpj());
+		empresaDto.setId(empresa.getId());
+		empresaDto.setCnpj(empresa.getCnpj());
 		empresaDto.setRazaoSocial(empresa.getRazaoSocial());
 		return empresaDto;
 	}

@@ -75,7 +75,7 @@ public class CadastroPFController {
 			return ResponseEntity.badRequest().body(response);
 		}
 		
-		Optional<Empresa> empresa = this.empresaService.buscarPorNumCnpj(cadastroPFDto.getCnpj());
+		Optional<Empresa> empresa = this.empresaService.buscarPorCnpj(cadastroPFDto.getCnpj());
 		empresa.ifPresent(emp -> funcionario.setEmpresa(emp));
 		this.funcionarioService.persistirFuncionario(funcionario);
 		
@@ -86,19 +86,19 @@ public class CadastroPFController {
 	/**
 	 * Verifica se a empresa existe e verifica se o funcionário está cadastrado.
 	 * 
-	 * @param cadastroPJDto
+	 * @param cadastroPFDto
 	 * @param result
 	 */
 	private void validarDadosExistentes(CadastroPFDto cadastroPFDto, BindingResult result) {
 		
 		log.info("Validando dados existentes de PF: {}", cadastroPFDto.toString());
 		
-		Optional<Empresa> empresa = this.empresaService.buscarPorNumCnpj(cadastroPFDto.getCnpj());
+		Optional<Empresa> empresa = this.empresaService.buscarPorCnpj(cadastroPFDto.getCnpj());
 		if (!empresa.isPresent()) {
 			result.addError(new ObjectError("empresa", "Empresa não cadastrada."));			
 		}
 		
-		this.funcionarioService.buscarFuncionarioPorNumCpf(cadastroPFDto.getCpf()).ifPresent(
+		this.funcionarioService.buscarFuncionarioPorCpf(cadastroPFDto.getCpf()).ifPresent(
 				func -> result.addError(
 						new ObjectError("Funcionario",
 								"Já existe um funcionário com este CPF.")));
@@ -123,7 +123,7 @@ public class CadastroPFController {
 		
 		funcionario.setNome(cadastroPFDto.getNome());
 		funcionario.setEmail(cadastroPFDto.getEmail());
-		funcionario.setNumCpf(cadastroPFDto.getCpf());
+		funcionario.setCpf(cadastroPFDto.getCpf());
 		funcionario.setPerfil(PerfilEnum.ROLE_USUARIO);
 		funcionario.setSenha(PasswordUtils.generateBCrypt(cadastroPFDto.getSenha()));
 		
@@ -148,11 +148,11 @@ public class CadastroPFController {
 	 */
 	private CadastroPFDto converterPFParaDto(Funcionario funcionario) {
 		CadastroPFDto cadastroPFDto = new CadastroPFDto();
-		cadastroPFDto.setId(funcionario.getIdFuncionario());
+		cadastroPFDto.setId(funcionario.getId());
 		cadastroPFDto.setNome(funcionario.getNome());
 		cadastroPFDto.setEmail(funcionario.getEmail());
-		cadastroPFDto.setCpf(funcionario.getNumCpf());
-		cadastroPFDto.setCnpj(funcionario.getEmpresa().getNumCnpj());
+		cadastroPFDto.setCpf(funcionario.getCpf());
+		cadastroPFDto.setCnpj(funcionario.getEmpresa().getCnpj());
 		
 		funcionario.getQtdHorasAlmocoOpt()
 		.ifPresent(qtdHorasAlmoco -> cadastroPFDto

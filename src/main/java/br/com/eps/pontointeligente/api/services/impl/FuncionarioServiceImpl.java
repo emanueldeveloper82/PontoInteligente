@@ -27,9 +27,9 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	}
 
 	@Override
-	public Optional<Funcionario> buscarFuncionarioPorNumCpf(String numCpf) {
-		log.info("Buscando um Funcionário pelo CPF {}", numCpf);
-		return Optional.ofNullable(this.funcionarioRepository.findByNumCpf(numCpf));
+	public Optional<Funcionario> buscarFuncionarioPorCpf(String cpf) {
+		log.info("Buscando um Funcionário pelo CPF {}", cpf);
+		return Optional.ofNullable(this.funcionarioRepository.findByCpf(cpf));
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	@Override
 	public List<Funcionario> buscarPorIdEmpresa(Long idEmpresa) {
 		log.info("Buscando funcionários pela empresa ID {}", idEmpresa);
-		return funcionarioRepository.findByEmpresaIdEmpresa(idEmpresa);
+		return funcionarioRepository.findByEmpresaId(idEmpresa);
 	}
 
 }

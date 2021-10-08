@@ -21,7 +21,7 @@ public interface FuncionarioService {
 	 * @param numCpf
 	 * @return Funcionario
 	 */
-	Optional<Funcionario> buscarFuncionarioPorNumCpf(String numCpf);
+	Optional<Funcionario> buscarFuncionarioPorCpf(String numCpf);
 	
 	/**
 	 * Buscando um funcionário pelo E-mail.

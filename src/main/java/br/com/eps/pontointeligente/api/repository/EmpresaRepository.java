@@ -7,6 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface EmpresaRepository extends JpaRepository<Empresa, Long> {
 	
 	@Transactional(readOnly = true)
-	public Empresa findByNumCnpj(String numCnpj);
+	public Empresa findByCnpj(String cnpj);
 
 }

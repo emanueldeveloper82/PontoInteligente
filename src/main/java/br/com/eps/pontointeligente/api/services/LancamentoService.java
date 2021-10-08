@@ -32,7 +32,7 @@ public interface LancamentoService {
 	 * @param pageRequest
 	 * @return Page<Lancamento>
 	 */
-	Page<Lancamento> buscarPorIdFuncionario(Long idFuncionario, PageRequest pageRequest);
+	Page<Lancamento> buscarLancamentoPorIdFuncionario(Long idFuncionario, PageRequest pageRequest);
 	
 	/**
 	 * Buscar um lançamento pelo seu id.
@@ -40,7 +40,7 @@ public interface LancamentoService {
 	 * @param idLancamento
 	 * @return Optional<Lancamento>
 	 */
-	Optional<Lancamento> buscarPorIdLancamento(Long idLancamento);
+	Optional<Lancamento> buscarLancamentoPorIdLancamento(Long idLancamento);
 	
 	
 	/**

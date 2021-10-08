@@ -8,12 +8,12 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 	
-	public Funcionario findByNumCpf(String numCpf);
+	public Funcionario findByCpf(String cpf);
 	
 	public Funcionario findByEmail(String email);
 	
-	public Funcionario findByNumCpfOrEmail(String numCpf, String email);
+	public Funcionario findByCpfOrEmail(String cpf, String email);
 	
-	List<Funcionario> findByEmpresaIdEmpresa(Long id);
+	List<Funcionario> findByEmpresaId(Long id);
 
 }
