@@ -1,1 +1,2 @@
+#Não alterar isso aqui de forma alguma. Esse é o jar que sobe via deploy autmático no heroku
 web: java -Dserver.port=$PORT -Dspring.profiles.active=prod -jar build/libs/PontoInteligente-0.0.1-SNAPSHOT.jar
